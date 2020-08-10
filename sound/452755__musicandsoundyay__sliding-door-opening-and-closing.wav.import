@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/452755__musicandsoundyay__sliding-door-opening-and-closing.wav-75b872d669f515a37eb34b9fb4456279.sample"
+
+[deps]
+
+source_file="res://sound/452755__musicandsoundyay__sliding-door-opening-and-closing.wav"
+dest_files=[ "res://.import/452755__musicandsoundyay__sliding-door-opening-and-closing.wav-75b872d669f515a37eb34b9fb4456279.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
