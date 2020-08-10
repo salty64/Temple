@@ -19,6 +19,7 @@
 [ext_resource path="res://sound/476871__ancientoracle__bowl-bell-1-one-hit-fade.wav" type="AudioStream" id=17]
 [ext_resource path="res://sound/Thoribass-QuietTree.ogg" type="AudioStream" id=18]
 [ext_resource path="res://script/Abbey.gd" type="Script" id=19]
+[ext_resource path="res://asset/Circuit1.glb" type="PackedScene" id=20]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -158,10 +159,6 @@ glow_enabled = true
 radius = 0.5
 height = 2.79487
 
-[sub_resource type="CapsuleMesh" id=16]
-radius = 0.5
-mid_height = 0.5
-
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 19 )
 
@@ -286,8 +283,6 @@ shape = SubResource( 12 )
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 14 )
 
-[node name="Abbey_1" parent="." instance=ExtResource( 1 )]
-
 [node name="Bell" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.169, 3.88613, 4.32636 )
 collision_layer = 2147483650
@@ -313,48 +308,68 @@ stream = ExtResource( 18 )
 
 [node name="Lanternes" type="Spatial" parent="."]
 
-[node name="SpotLight" type="SpotLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.7942, 5.85652, -3.00673 )
-spot_range = 5.41505
-spot_angle = 49.5791
+[node name="SpotLight" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.5, -3 )
+light_bake_mode = 0
+shadow_enabled = true
+omni_shadow_mode = 0
 
-[node name="SpotLight2" type="SpotLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.7942, 5.85652, -8.98407 )
-spot_range = 5.41505
-spot_angle = 49.5791
+[node name="SpotLight2" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.5, -9 )
+light_bake_mode = 0
+shadow_enabled = true
+omni_shadow_mode = 0
 
-[node name="SpotLight3" type="SpotLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.51277, 5.85652, -3.00673 )
-spot_range = 5.41505
-spot_angle = 49.5791
+[node name="SpotLight4" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.5, 5.5, -9 )
+light_bake_mode = 0
+shadow_enabled = true
+omni_shadow_mode = 0
 
-[node name="SpotLight4" type="SpotLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.51277, 5.85652, -8.98407 )
-spot_range = 5.41505
-spot_angle = 49.5791
-
-[node name="SpotLight5" type="SpotLight" parent="Lanternes"]
+[node name="SpotLight5" type="OmniLight" parent="Lanternes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4054, 5.61671, -2.40282 )
-spot_range = 5.41505
-spot_angle = 49.5791
+light_bake_mode = 0
+shadow_enabled = true
 
-[node name="SpotLight6" type="SpotLight" parent="Lanternes"]
+[node name="SpotLight6" type="OmniLight" parent="Lanternes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4255, 5.85652, -14.1846 )
-spot_range = 5.41505
-spot_angle = 49.5791
+light_bake_mode = 0
+shadow_enabled = true
 
-[node name="SpotLight7" type="SpotLight" parent="Lanternes"]
+[node name="SpotLight7" type="OmniLight" parent="Lanternes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.56295, -2.40084 )
-spot_range = 5.41505
-spot_angle = 49.5791
+light_bake_mode = 0
+shadow_enabled = true
 
-[node name="SpotLight8" type="SpotLight" parent="Lanternes"]
+[node name="SpotLight8" type="OmniLight" parent="Lanternes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.85652, -13.8708 )
-spot_range = 5.41505
-spot_angle = 49.5791
+light_bake_mode = 0
+shadow_enabled = true
 
-[node name="MeshInstance" type="MeshInstance" parent="Lanternes/SpotLight8"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224846, -0.297393 )
-visible = false
-mesh = SubResource( 16 )
-material/0 = null
+[node name="SpotLight9" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.9932, 7.07249, 15.0053 )
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="SpotLight12" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 17.9881, 7.07249, 15.0053 )
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="SpotLight11" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 10.8319, 5.60511, -14.0868 )
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="SpotLight10" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 3.30716, 5.85652, -13.8708 )
+light_bake_mode = 0
+shadow_enabled = true
+
+[node name="OmniLight" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, 0.019686, 0.999806, 0, -0.999806, 0.019686, -3.5, 6.05162, -3 )
+shadow_enabled = true
+
+[node name="Abbey_1" parent="." instance=ExtResource( 1 )]
+
+[node name="Circuit1" parent="." instance=ExtResource( 20 )]
