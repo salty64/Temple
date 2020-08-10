@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -11,6 +11,14 @@
 [ext_resource path="res://asset/Rotate_90_2.glb" type="PackedScene" id=9]
 [ext_resource path="res://asset/Mirror_2.glb" type="PackedScene" id=10]
 [ext_resource path="res://asset/Batterry_switch.glb" type="PackedScene" id=11]
+[ext_resource path="res://asset/Circle_90.glb" type="PackedScene" id=12]
+[ext_resource path="res://asset/Circle_180.glb" type="PackedScene" id=13]
+[ext_resource path="res://asset/Door_eclipse.glb" type="PackedScene" id=14]
+[ext_resource path="res://asset/Bell.glb" type="PackedScene" id=15]
+[ext_resource path="res://script/Bell.gd" type="Script" id=16]
+[ext_resource path="res://sound/476871__ancientoracle__bowl-bell-1-one-hit-fade.wav" type="AudioStream" id=17]
+[ext_resource path="res://sound/Thoribass-QuietTree.ogg" type="AudioStream" id=18]
+[ext_resource path="res://script/Abbey.gd" type="Script" id=19]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -129,9 +137,33 @@ height = 0.655439
 radius = 1.13983
 height = 3.18314
 
-[node name="Spatial" type="Spatial"]
+[sub_resource type="CylinderShape" id=10]
+radius = 1.43929
+height = 0.668333
 
-[node name="Abbey_1" parent="." instance=ExtResource( 1 )]
+[sub_resource type="CylinderShape" id=11]
+radius = 1.45466
+height = 0.752724
+
+[sub_resource type="BoxShape" id=12]
+
+[sub_resource type="ProceduralSky" id=13]
+
+[sub_resource type="Environment" id=14]
+background_mode = 2
+background_sky = SubResource( 13 )
+glow_enabled = true
+
+[sub_resource type="CylinderShape" id=15]
+radius = 0.5
+height = 2.79487
+
+[sub_resource type="CapsuleMesh" id=16]
+radius = 0.5
+mid_height = 0.5
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 19 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.97034, 1.68608, -12.7569 )
@@ -190,6 +222,7 @@ shape = SubResource( 5 )
 anims/Animation_door = SubResource( 6 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_Large_1"]
+transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0, 0.333333, 0, 0, 0 )
 stream = ExtResource( 8 )
 unit_db = 20.0
 
@@ -216,7 +249,112 @@ shape = SubResource( 8 )
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.9959, 1.42714, 7.49839 )
 
 [node name="Batterry_switch" parent="Pivot_3" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38212, 0 )
 shape = SubResource( 9 )
+
+[node name="Pivot_4" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 4.5, 22.5 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot_4"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -0.334196, 0, 0 )
+shape = SubResource( 10 )
+
+[node name="Circle_90" parent="Pivot_4" instance=ExtResource( 12 )]
+transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Pivot_5" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7, 4.5, 24 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot_5"]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0.33, 0, 0 )
+shape = SubResource( 11 )
+
+[node name="Circle_180" parent="Pivot_5" instance=ExtResource( 13 )]
+transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Door_eclipse" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51864, 0, 2.54507 )
+
+[node name="Door_eclipse" parent="Door_eclipse" instance=ExtResource( 14 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="Door_eclipse"]
+shape = SubResource( 12 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 14 )
+
+[node name="Abbey_1" parent="." instance=ExtResource( 1 )]
+
+[node name="Bell" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.169, 3.88613, 4.32636 )
+collision_layer = 2147483650
+collision_mask = 2147483650
+script = ExtResource( 16 )
+
+[node name="Bell" parent="Bell" instance=ExtResource( 15 )]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Bell"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302946, 1.20772, -3.81241 )
+shape = SubResource( 15 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Bell"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.2, -3.8 )
+stream = ExtResource( 17 )
+attenuation_model = 2
+max_db = -16.794
+
+[node name="Ambiance" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8851, 12.2727, 3.42017 )
+stream = ExtResource( 18 )
+
+[node name="Lanternes" type="Spatial" parent="."]
+
+[node name="SpotLight" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.7942, 5.85652, -3.00673 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight2" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.7942, 5.85652, -8.98407 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight3" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.51277, 5.85652, -3.00673 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight4" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.51277, 5.85652, -8.98407 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight5" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4054, 5.61671, -2.40282 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight6" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4255, 5.85652, -14.1846 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight7" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.56295, -2.40084 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="SpotLight8" type="SpotLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.85652, -13.8708 )
+spot_range = 5.41505
+spot_angle = 49.5791
+
+[node name="MeshInstance" type="MeshInstance" parent="Lanternes/SpotLight8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224846, -0.297393 )
+visible = false
+mesh = SubResource( 16 )
+material/0 = null

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Thoribass-QuietTree.ogg-ffebfac47ab0ccbf22faa4bf6199b3c0.oggstr"
+
+[deps]
+
+source_file="res://sound/Thoribass-QuietTree.ogg"
+dest_files=[ "res://.import/Thoribass-QuietTree.ogg-ffebfac47ab0ccbf22faa4bf6199b3c0.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

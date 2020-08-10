@@ -32,7 +32,10 @@ func _process(delta):
 		if ray_coll !=null :
 			if ray_coll.name=="Pivot_1":
 				ray_coll.play()
-			 
+			if ray_coll.name=="Bell":
+				ray_coll.play()
+		ray_coll=null
+		 
 func _physics_process(delta):
 	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized()*SPEED)
 	if raycast.is_colliding():
