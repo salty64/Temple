@@ -37,7 +37,9 @@ func _process(delta):
 		ray_coll=null
 		 
 func _physics_process(delta):
-	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized()*SPEED)
+	if !is_on_floor():
+		dir.y-=1
+	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized()*SPEED,Vector3.UP,true)
 	if raycast.is_colliding():
 		ray_coll = raycast.get_collider()
 	
