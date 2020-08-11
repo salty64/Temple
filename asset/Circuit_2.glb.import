@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Abbey_1.glb-53cc833c721465493326f1b11bcca4a0.scn"
+path="res://.import/Circuit_2.glb-9e0c655c554817682a47fd818098100b.scn"
 
 [deps]
 
-source_file="res://asset/Abbey_1.glb"
-dest_files=[ "res://.import/Abbey_1.glb-53cc833c721465493326f1b11bcca4a0.scn" ]
+source_file="res://asset/Circuit_2.glb"
+dest_files=[ "res://.import/Circuit_2.glb-9e0c655c554817682a47fd818098100b.scn" ]
 
 [params]
 
