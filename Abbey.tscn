@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=106 format=2]
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -30,6 +30,9 @@
 [ext_resource path="res://sound/404049__deathscyp__breaker-1.wav" type="AudioStream" id=28]
 [ext_resource path="res://asset/Inter_base.glb" type="PackedScene" id=29]
 [ext_resource path="res://asset/Led.glb" type="PackedScene" id=30]
+[ext_resource path="res://asset/Sandstone_Trim.material" type="Material" id=31]
+[ext_resource path="res://sound/doorOpen_2.ogg" type="AudioStream" id=32]
+[ext_resource path="res://sound/metalClick.ogg" type="AudioStream" id=33]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -93,7 +96,7 @@ extents = Vector3( 1.00592, 1.52115, 0.291062 )
 
 [sub_resource type="Animation" id=6]
 resource_name = "Animation_door"
-length = 2.0
+length = 4.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
 tracks/0/interp = 1
@@ -101,8 +104,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -2.41804, -0.25, 0, 0.25, 0, -2.41804, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PoolRealArray( -2.6, -0.25, 0, 0.25, 0, -2.6, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
 }
 tracks/1/type = "bezier"
 tracks/1/path = NodePath(".:translation:y")
@@ -111,8 +114,8 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0.0613995, -0.25, 0, 0.25, 0, 0.0613995, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PoolRealArray( 0.061, -0.25, 0, 0.25, 0, 0.061, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
 }
 tracks/2/type = "bezier"
 tracks/2/path = NodePath(".:translation:z")
@@ -121,8 +124,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( -7.50701, -0.25, 0, 0.25, 0, -12.3521, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"points": PoolRealArray( -7.507, -0.25, 0, 0.25, 0, -12.879, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
@@ -131,7 +134,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 2 ),
+"times": PoolRealArray( 4.5 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
@@ -145,6 +148,53 @@ radius = 1.5748
 height = 0.655439
 
 [sub_resource type="BoxShape" id=9]
+extents = Vector3( 1.32362, 2.48861, 0.553034 )
+
+[sub_resource type="Animation" id=24]
+resource_name = "Animation_door"
+length = 1.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 7.51864, -0.25, 0, 0.25, 0, 5.04542, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 2.54507, -0.25, 0, 0.25, 0, 2.54507, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1.5 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
 
 [sub_resource type="ProceduralSky" id=10]
 
@@ -394,9 +444,247 @@ tracks/3/keys = {
 radius = 1.43929
 height = 0.668333
 
+[sub_resource type="BoxShape" id=25]
+extents = Vector3( 2.43967, 1, 0.741609 )
+
+[sub_resource type="Animation" id=26]
+resource_name = "Animation_trap"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath(".:translation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:translation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:translation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.5 )
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
 [sub_resource type="CylinderShape" id=20]
 radius = 1.45466
 height = 0.752724
+
+[sub_resource type="PlaneMesh" id=21]
+size = Vector2( 70, 55 )
+
+[sub_resource type="BoxShape" id=22]
+extents = Vector3( 0.833497, 1.47772, 0.129141 )
+
+[sub_resource type="Animation" id=23]
+resource_name = "Animation_door"
+length = 4.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath(".:translation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 33.5, -0.25, 0, 0.25, 0, 33.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:translation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:translation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 3, -0.25, 0, 0.25, 0, 7.79856, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4.5 )
+}
+
+[sub_resource type="BoxShape" id=28]
+extents = Vector3( 4.98627, 1, 0.399866 )
+
+[sub_resource type="BoxShape" id=29]
+extents = Vector3( 0.473265, 1, 4.33338 )
+
+[sub_resource type="BoxShape" id=30]
+extents = Vector3( 0.357504, 1, 4.62488 )
+
+[sub_resource type="BoxShape" id=31]
+extents = Vector3( 1.80555, 1, 0.427569 )
+
+[sub_resource type="BoxShape" id=27]
+extents = Vector3( 10.8391, 1, 0.445696 )
+
+[sub_resource type="BoxShape" id=32]
+extents = Vector3( 8.25791, 1, 0.409171 )
+
+[sub_resource type="BoxShape" id=33]
+extents = Vector3( 1.05452, 1, 1.99236 )
+
+[sub_resource type="BoxShape" id=34]
+extents = Vector3( 1.05452, 1, 1.9761 )
+
+[sub_resource type="BoxShape" id=35]
+extents = Vector3( 0.381922, 1, 3.08665 )
+
+[sub_resource type="BoxShape" id=36]
+extents = Vector3( 1.94052, 1, 0.966154 )
+
+[sub_resource type="BoxShape" id=37]
+extents = Vector3( 1.92617, 1, 1.25176 )
+
+[sub_resource type="BoxShape" id=38]
+extents = Vector3( 0.515133, 1, 3.53377 )
+
+[sub_resource type="BoxShape" id=39]
+extents = Vector3( 1.68914, 1, 0.340991 )
+
+[sub_resource type="BoxShape" id=40]
+extents = Vector3( 11.3949, 1, 0.323712 )
+
+[sub_resource type="BoxShape" id=41]
+extents = Vector3( 0.466269, 1, 2.47252 )
+
+[sub_resource type="BoxShape" id=42]
+extents = Vector3( 2.64475, 1, 0.459017 )
+
+[sub_resource type="BoxShape" id=43]
+extents = Vector3( 2.15472, 1, 0.326007 )
+
+[sub_resource type="BoxShape" id=44]
+extents = Vector3( 0.392807, 1, 8.49412 )
+
+[sub_resource type="BoxShape" id=52]
+extents = Vector3( 1.54342, 1, 4.54872 )
+
+[sub_resource type="BoxShape" id=45]
+extents = Vector3( 0.379028, 1, 16.308 )
+
+[sub_resource type="BoxShape" id=46]
+extents = Vector3( 2.23217, 1, 0.352632 )
+
+[sub_resource type="BoxShape" id=47]
+extents = Vector3( 10.6075, 1, 0.365348 )
+
+[sub_resource type="BoxShape" id=48]
+extents = Vector3( 1.60744, 1, 0.334625 )
+
+[sub_resource type="BoxShape" id=49]
+extents = Vector3( 0.884901, 1, 2.18391 )
+
+[sub_resource type="BoxShape" id=50]
+extents = Vector3( 5.52542, 1, 2.18391 )
+
+[sub_resource type="BoxShape" id=51]
+extents = Vector3( 0.884901, 1, 2.18391 )
+
+[sub_resource type="BoxShape" id=53]
+extents = Vector3( 0.57287, 1, 6.07259 )
+
+[sub_resource type="BoxShape" id=54]
+extents = Vector3( 0.57287, 1, 6.07259 )
+
+[sub_resource type="BoxShape" id=55]
+extents = Vector3( 2.11796, 3.86075, 4.01096 )
+
+[sub_resource type="BoxShape" id=56]
+extents = Vector3( 2.11796, 3.86075, 2.21501 )
+
+[sub_resource type="BoxShape" id=57]
+extents = Vector3( 0.329798, 1, 13.0172 )
+
+[sub_resource type="BoxShape" id=58]
+extents = Vector3( 1.38428, 1, 1 )
+
+[sub_resource type="BoxShape" id=59]
+extents = Vector3( 4.83038, 1, 0.342742 )
+
+[sub_resource type="BoxShape" id=60]
+extents = Vector3( 4.83038, 1, 0.342742 )
+
+[sub_resource type="BoxShape" id=61]
+extents = Vector3( 1.38428, 1, 1 )
+
+[sub_resource type="BoxShape" id=62]
+extents = Vector3( 0.389915, 1, 7.57337 )
+
+[sub_resource type="BoxShape" id=63]
+extents = Vector3( 1.9206, 1, 0.40654 )
+
+[sub_resource type="BoxShape" id=64]
+extents = Vector3( 1.7046, 1, 5.62435 )
+
+[sub_resource type="BoxShape" id=65]
+extents = Vector3( 0.773151, 1, 3.0506 )
+
+[sub_resource type="BoxShape" id=66]
+extents = Vector3( 2.03341, 1, 1 )
+
+[sub_resource type="BoxShape" id=67]
+extents = Vector3( 1.01075, 1, 0.861189 )
+
+[sub_resource type="BoxShape" id=68]
+
+[sub_resource type="BoxShape" id=69]
+extents = Vector3( 1.89302, 1, 7.54934 )
+
+[sub_resource type="BoxShape" id=70]
+extents = Vector3( 2.23221, 1.89147, 3.09761 )
+
+[sub_resource type="BoxShape" id=71]
+extents = Vector3( 4.11248, 1, 3.06627 )
+
+[sub_resource type="BoxShape" id=72]
+extents = Vector3( 4.11248, 1, 3.06627 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 19 )
@@ -444,14 +732,14 @@ stream = ExtResource( 7 )
 unit_db = 80.0
 
 [node name="Door_Large_1" type="StaticBody" parent="."]
-transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, -2.41804, 0.0613995, -12.3521 )
+transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, -2.6, 0.061, -7.507 )
 script = ExtResource( 6 )
 
 [node name="Door_large" parent="Door_Large_1" instance=ExtResource( 5 )]
-transform = Transform( 1.2, 0, -2.85993e-12, 0, 1.1, 0, 9.80549e-13, 0, 3.5, -0.109273, -0.0198932, 0.892093 )
+transform = Transform( 1.2, 0, -2.89901e-12, 0, 1.1, 0, 9.9476e-13, 0, 3.5, -0.109273, -0.0198932, 0.892093 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Door_Large_1"]
-transform = Transform( 1, 0, -7.67386e-13, 0, 1, 0, 7.67386e-13, 0, 1, 0.496205, 1.42748, -0.78991 )
+transform = Transform( 1, 0, -7.67386e-13, 0, 1, 0, 7.67386e-13, 0, 1, 0.496205, 1.42748, -0.851103 )
 shape = SubResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door_Large_1"]
@@ -485,9 +773,17 @@ shape = SubResource( 8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51864, 0, 2.54507 )
 
 [node name="Door_eclipse" parent="Door_eclipse" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.5, 0, 0, -0.959239 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Door_eclipse"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38325, -1.48227 )
 shape = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door_eclipse"]
+anims/Animation_door = SubResource( 24 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_eclipse"]
+stream = ExtResource( 32 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 11 )
@@ -517,67 +813,98 @@ stream = ExtResource( 18 )
 
 [node name="Lanternes" type="Spatial" parent="."]
 
-[node name="SpotLight" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.5, -3 )
+[node name="SpotLight1" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.6, -3 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
+light_specular = 1.0
 light_bake_mode = 0
 shadow_enabled = true
-omni_shadow_mode = 0
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight2" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.5, -9 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.6, -9 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
+light_specular = 1.0
 light_bake_mode = 0
 shadow_enabled = true
-omni_shadow_mode = 0
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
+
+[node name="SpotLigth3" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, 0.019686, 0.999806, 0, -0.999806, 0.019686, -3.5, 5.6, -3 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
+shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight4" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.5, 5.5, -9 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -3.5, 5.6, -9 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
-omni_shadow_mode = 0
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight5" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4054, 5.61671, -2.40282 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4054, 5.6, -2.40282 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight6" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4255, 5.85652, -14.1846 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 14.4255, 5.6, -14.1846 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight7" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.56295, -2.40084 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.6, -2.40084 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight8" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.85652, -13.8708 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 25.1855, 5.6, -13.8708 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
-
-[node name="SpotLight9" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.9932, 7.07249, 15.0053 )
-light_bake_mode = 0
-shadow_enabled = true
-
-[node name="SpotLight12" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 17.9881, 7.07249, 15.0053 )
-light_bake_mode = 0
-shadow_enabled = true
-
-[node name="SpotLight11" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 10.8319, 5.60511, -14.0868 )
-light_bake_mode = 0
-shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
 [node name="SpotLight10" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 3.30716, 5.85652, -13.8708 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 3.30716, 5.6, -13.8708 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
 light_bake_mode = 0
 shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
 
-[node name="OmniLight" type="OmniLight" parent="Lanternes"]
-transform = Transform( 1, 0, 0, 0, 0.019686, 0.999806, 0, -0.999806, 0.019686, -3.5, 6.05162, -3 )
+[node name="SpotLight11" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 10.8319, 5.6, -14.0868 )
+light_color = Color( 0.811765, 0.772549, 0.721569, 1 )
+light_bake_mode = 0
 shadow_enabled = true
+shadow_color = Color( 0.815686, 0.843137, 0.705882, 1 )
+omni_range = 3.2
+
+[node name="SpotLight12" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 17.9881, 7.1709, 15.0053 )
+light_bake_mode = 0
+shadow_enabled = true
+omni_range = 3.0
+
+[node name="SpotLight13" type="OmniLight" parent="Lanternes"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 11.9932, 7.1709, 15.0053 )
+light_bake_mode = 0
+shadow_enabled = true
+omni_range = 3.0
 
 [node name="Abbey_1" parent="." instance=ExtResource( 1 )]
 
@@ -686,7 +1013,21 @@ shape = SubResource( 19 )
 
 [node name="Circuit_2" parent="." instance=ExtResource( 24 )]
 
-[node name="Trap" parent="." instance=ExtResource( 26 )]
+[node name="Trap" type="StaticBody" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="Trap" parent="Trap" instance=ExtResource( 26 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="Trap"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1587, 0, 17.8611 )
+shape = SubResource( 25 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Trap"]
+anims/Animation_trap = SubResource( 26 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Trap"]
+stream = ExtResource( 33 )
 
 [node name="Pivot_180" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.7, 4.5, 24 )
@@ -699,3 +1040,223 @@ transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0.33, 0
 shape = SubResource( 20 )
 
 [node name="Circuit_3" parent="." instance=ExtResource( 25 )]
+
+[node name="Ceiling" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 11, 9, 7.5 )
+mesh = SubResource( 21 )
+material/0 = ExtResource( 31 )
+
+[node name="Door_Large_2" type="StaticBody" parent="."]
+transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, 33.5, 0, 7.79856 )
+script = ExtResource( 6 )
+
+[node name="Door_large" parent="Door_Large_2" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, -8.81073e-13, 0, 1, 0, 8.81073e-13, 0, 1, -0.506659, 0, 0.515437 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Door_Large_2"]
+transform = Transform( 1, 0, -8.52651e-14, 0, 1, 0, 8.52651e-14, 0, 1, 0, 1.49195, 0 )
+shape = SubResource( 22 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Door_Large_2"]
+anims/Animation_door = SubResource( 23 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_Large_2"]
+transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0, 0.333333, 0, 0, 0 )
+stream = ExtResource( 8 )
+unit_db = 20.0
+
+[node name="Limits" type="Spatial" parent="."]
+
+[node name="Limit_1" type="StaticBody" parent="Limits"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.00041, 0, -19.5267 )
+shape = SubResource( 28 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5252, 0, -15.0175 )
+shape = SubResource( 29 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49163, 0, -15.0398 )
+shape = SubResource( 30 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9849, 0, -10.5392 )
+shape = SubResource( 31 )
+
+[node name="Limit_2" type="StaticBody" parent="Limits"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.344, 0, -1.41183 )
+shape = SubResource( 27 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4887, 0, -10.4613 )
+shape = SubResource( 32 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -22.4422, 0, -2.18895 )
+shape = SubResource( 33 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -22.4422, 0, -9.79017 )
+shape = SubResource( 34 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.465, 0, -5.99382 )
+shape = SubResource( 35 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34465e-07, 0, -9.35198 )
+shape = SubResource( 36 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00758553, 0, -2.37009 )
+shape = SubResource( 37 )
+
+[node name="Limit_3" type="StaticBody" parent="Limits"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46489, 0, -12.1413 )
+shape = SubResource( 38 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.47569, 0, -15.7294 )
+shape = SubResource( 39 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2862, 0, -16.5143 )
+shape = SubResource( 40 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56256, 0, -0.970579 )
+shape = SubResource( 41 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59653, 0, 1.04899 )
+shape = SubResource( 42 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9746, 0, 0.9056 )
+shape = SubResource( 43 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5696, 0, -7.8299 )
+shape = SubResource( 44 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.487, 0, -9.00188 )
+shape = SubResource( 52 )
+
+[node name="Limit_4" type="StaticBody" parent="Limits"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01217, 0, 17.2496 )
+shape = SubResource( 45 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 3.87574, 0, 33.5635 )
+shape = SubResource( 46 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0106, 0, 34.4975 )
+shape = SubResource( 47 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 26.2105, 0, 33.5478 )
+shape = SubResource( 48 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3692, 0, 14.892 )
+shape = SubResource( 49 )
+
+[node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0419, 0, 14.892 )
+shape = SubResource( 50 )
+
+[node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6454, 0, 14.892 )
+shape = SubResource( 51 )
+
+[node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.494, 0, 7.02681 )
+shape = SubResource( 53 )
+
+[node name="CollisionShape9" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4878, 0, 7.02681 )
+shape = SubResource( 54 )
+
+[node name="CollisionShape10" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0046, 3.87003, 20.5971 )
+shape = SubResource( 55 )
+
+[node name="CollisionShape11" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0046, 3.87003, 32.8153 )
+shape = SubResource( 56 )
+
+[node name="CollisionShape12" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0284, 0, 20.6466 )
+shape = SubResource( 57 )
+
+[node name="CollisionShape13" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 28.3724, 0, 7.35732 )
+shape = SubResource( 58 )
+
+[node name="CollisionShape14" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4701, 0, 6.02489 )
+shape = SubResource( 59 )
+
+[node name="CollisionShape15" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4701, 0, -0.0135932 )
+shape = SubResource( 60 )
+
+[node name="CollisionShape16" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 28.3724, 0, -1.35779 )
+shape = SubResource( 61 )
+
+[node name="CollisionShape17" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0825, 0, -9.19915 )
+shape = SubResource( 62 )
+
+[node name="CollisionShape18" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 26.1319, 0, -15.7185 )
+shape = SubResource( 63 )
+
+[node name="CollisionShape19" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.0648, 0, -8.23302 )
+shape = SubResource( 64 )
+
+[node name="CollisionShape20" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5427, 0, -8.36795 )
+shape = SubResource( 65 )
+
+[node name="CollisionShape21" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4751, 0, 0.941742 )
+shape = SubResource( 66 )
+
+[node name="CollisionShape22" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5099, 0, -7.45858 )
+shape = SubResource( 67 )
+
+[node name="CollisionShape23" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4365, 0, -16.3251 )
+shape = SubResource( 68 )
+
+[node name="CollisionShape24" type="CollisionShape" parent="Limits/Limit_4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6535, 0, -5.94298 )
+shape = SubResource( 69 )
+
+[node name="Limit_5" type="StaticBody" parent="Limits"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0205, 0.914922, 27.5929 )
+shape = SubResource( 70 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_5"]
+transform = Transform( 0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 9.48716, 0.161977, 27.6134 )
+shape = SubResource( 71 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_5"]
+transform = Transform( -0.906308, 0.422618, -3.25841e-07, 0.422618, 0.906308, 0, 2.95313e-07, -1.37707e-07, -1, 20.5276, 0.161977, 27.6134 )
+shape = SubResource( 72 )
