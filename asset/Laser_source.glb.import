@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Abbey_1.glb-53cc833c721465493326f1b11bcca4a0.scn"
+path="res://.import/Laser_source.glb-c93dd16da365ce8f59d1a4c830489531.scn"
 
 [deps]
 
-source_file="res://asset/Abbey_1.glb"
-dest_files=[ "res://.import/Abbey_1.glb-53cc833c721465493326f1b11bcca4a0.scn" ]
+source_file="res://asset/Laser_source.glb"
+dest_files=[ "res://.import/Laser_source.glb-c93dd16da365ce8f59d1a4c830489531.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=3.0
+nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 materials/location=1

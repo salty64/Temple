@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/393288__dsa98__56-ruedas-de-carrito-consolidated.wav-8476a1c8c1fa691a1ab585f4afde6381.sample"
+
+[deps]
+
+source_file="res://sound/393288__dsa98__56-ruedas-de-carrito-consolidated.wav"
+dest_files=[ "res://.import/393288__dsa98__56-ruedas-de-carrito-consolidated.wav-8476a1c8c1fa691a1ab585f4afde6381.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
