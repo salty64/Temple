@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Energy_180.glb-51cb4f1b65a3f65e74e5c646f8601860.scn"
+path="res://.import/Inter_base.glb-034de684f901ba4eba540ef6ed4f20ca.scn"
 
 [deps]
 
-source_file="res://asset/Energy_180.glb"
-dest_files=[ "res://.import/Energy_180.glb-51cb4f1b65a3f65e74e5c646f8601860.scn" ]
+source_file="res://asset/Inter_base.glb"
+dest_files=[ "res://.import/Inter_base.glb-034de684f901ba4eba540ef6ed4f20ca.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=1.0
+nodes/root_scale=2.0
 nodes/custom_script=""
 nodes/storage=0
 materials/location=1

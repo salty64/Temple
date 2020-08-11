@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/Energy_90.glb-e2246e41f8fef3902afd0fc693815250.scn"
+path="res://.import/Batterry.glb-70b4019971bf7434430bef2ff2917aa5.scn"
 
 [deps]
 
-source_file="res://asset/Energy_90.glb"
-dest_files=[ "res://.import/Energy_90.glb-e2246e41f8fef3902afd0fc693815250.scn" ]
+source_file="res://asset/Batterry.glb"
+dest_files=[ "res://.import/Batterry.glb-70b4019971bf7434430bef2ff2917aa5.scn" ]
 
 [params]
 
