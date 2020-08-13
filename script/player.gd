@@ -1,12 +1,15 @@
 extends KinematicBody
 
 
+
 var dir:Vector3
 var SPEED = 10.0
 var SENSI = 0.5
 var mouse_speed:Vector2
 onready var raycast:RayCast = $Camera/RayCast
-var ray_coll
+var ray_coll:Node
+var ray_have_collision := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,21 +31,48 @@ func _process(delta):
 	
 	rotate_y(-(mouse_speed.x*SENSI*delta))
 	mouse_speed = Vector2.ZERO
-	if Input.is_action_just_pressed("mouse_left"):
-		if ray_coll !=null :
-			if ray_coll.name=="Pivot_1":
-				ray_coll.play()
-			if ray_coll.name=="Bell":
-				ray_coll.play()
-		ray_coll=null
-		 
+	
+	if ray_coll !=null :
+		if ray_have_collision:
+			if ray_coll.is_in_group("outline"):
+				ray_coll.set_outline_true()
+				
+			if Input.is_action_just_pressed("mouse_left"):
+				if ray_coll.is_in_group("Action"):
+					ray_coll.play()
+		else :
+			if ray_coll.is_in_group("outline"):
+				ray_coll.set_outline_false()
+			ray_coll=null
+
+#			$Camera/UI_helper/Left.visible=false
+#			$Camera/UI_helper/Right.visible=false
+
+		
+#				if ray_coll.name=="Pivot_1" and get_parent().get_node("Pivot_1").done==false:
+#				var point = raycast.get_collision_point()
+#				$Camera/UI_helper/Left.visible=true
+
+#
+#			if ray_coll.name=="Pivot_2":
+#
+#				$Camera/UI_helper/Left.visible=true
+
+#			if ray_coll.name=="Rotate_90":
+
+#				$Camera/UI_helper/Right.visible=true
+
 func _physics_process(delta):
 	if !is_on_floor():
 		dir.y-=1
 	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized()*SPEED,Vector3.UP,true)
 	if raycast.is_colliding():
 		ray_coll = raycast.get_collider()
-	
+		ray_have_collision = true
+	else:
+		ray_have_collision = false
+
+
 
 
 

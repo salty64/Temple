@@ -1,20 +1,20 @@
-[gd_scene load_steps=107 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
-[ext_resource path="res://asset/Key_1.glb" type="PackedScene" id=3]
+[ext_resource path="res://scenes/intro/Key_1.tscn" type="PackedScene" id=3]
 [ext_resource path="res://script/Pivot_1.gd" type="Script" id=4]
 [ext_resource path="res://asset/Door_large.glb" type="PackedScene" id=5]
 [ext_resource path="res://script/Door_1.gd" type="Script" id=6]
 [ext_resource path="res://sound/446836__mateozugi19__sliding.wav" type="AudioStream" id=7]
 [ext_resource path="res://sound/452755__musicandsoundyay__sliding-door-opening-and-closing.wav" type="AudioStream" id=8]
-[ext_resource path="res://asset/Rotate_90_2.glb" type="PackedScene" id=9]
-[ext_resource path="res://asset/Mirror_2.glb" type="PackedScene" id=10]
+[ext_resource path="res://scenes/laser/Rotate_90_2.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/laser/Mirror_2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://asset/Batterry_switch.glb" type="PackedScene" id=11]
 [ext_resource path="res://asset/Batterry.glb" type="PackedScene" id=12]
 [ext_resource path="res://scenes/scene_1/Circle_180.tscn" type="PackedScene" id=13]
 [ext_resource path="res://asset/Door_eclipse.glb" type="PackedScene" id=14]
-[ext_resource path="res://asset/Bell.glb" type="PackedScene" id=15]
+[ext_resource path="res://scenes/scene_1/Bell.tscn" type="PackedScene" id=15]
 [ext_resource path="res://script/Bell.gd" type="Script" id=16]
 [ext_resource path="res://sound/476871__ancientoracle__bowl-bell-1-one-hit-fade.wav" type="AudioStream" id=17]
 [ext_resource path="res://sound/Thoribass-QuietTree.ogg" type="AudioStream" id=18]
@@ -33,6 +33,9 @@
 [ext_resource path="res://asset/Sandstone_Trim.material" type="Material" id=31]
 [ext_resource path="res://sound/doorOpen_2.ogg" type="AudioStream" id=32]
 [ext_resource path="res://sound/metalClick.ogg" type="AudioStream" id=33]
+[ext_resource path="res://scenes/UI_helper.tscn" type="PackedScene" id=34]
+[ext_resource path="res://script/Pivot_2.gd" type="Script" id=35]
+[ext_resource path="res://script/Rotate_90.gd" type="Script" id=36]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -150,7 +153,7 @@ height = 0.655439
 [sub_resource type="BoxShape" id=9]
 extents = Vector3( 1.32362, 2.48861, 0.553034 )
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=10]
 resource_name = "Animation_door"
 length = 1.5
 tracks/0/type = "bezier"
@@ -196,111 +199,67 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="ProceduralSky" id=10]
+[sub_resource type="ProceduralSky" id=11]
 
-[sub_resource type="Environment" id=11]
+[sub_resource type="Environment" id=12]
 background_mode = 2
-background_sky = SubResource( 10 )
+background_sky = SubResource( 11 )
+background_energy = 0.84
+ambient_light_sky_contribution = 0.39
 glow_enabled = true
 
-[sub_resource type="CylinderShape" id=12]
-radius = 0.5
+[sub_resource type="CylinderShape" id=13]
+radius = 0.775448
 height = 2.79487
 
-[sub_resource type="CylinderShape" id=13]
-radius = 1.13983
-height = 3.18314
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.302323, 0.388551, 0.494657 )
 
-[sub_resource type="Animation" id=14]
-resource_name = "Action"
-length = 4.0
+[sub_resource type="Animation" id=15]
+resource_name = "Switch"
+length = 0.5
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Batterry_switch:translation:x")
+tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Batterry_switch:translation:y")
+tracks/1/path = NodePath("Inter_levier:rotation_degrees:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Batterry_switch:translation:z")
+tracks/2/path = NodePath("Inter_levier:rotation_degrees:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
 }
-tracks/3/type = "bezier"
-tracks/3/path = NodePath(".:translation:x")
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 14.996, -0.25, 0, 0.25, 0, 14.996, -0.25, 0, 0.25, 0, 14.996, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
-}
-tracks/4/type = "bezier"
-tracks/4/path = NodePath(".:translation:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"points": PoolRealArray( 1.427, -0.25, 0, 0.25, 0, 1.427, -0.25, 0, 0.25, 0, 1.427, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
-}
-tracks/5/type = "bezier"
-tracks/5/path = NodePath(".:translation:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"points": PoolRealArray( -12, -0.25, 0, 0.25, 0, -12, -0.25, 0, 0.25, 0, 7.5, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1, 4 )
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("Switch:playing")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
-tracks/7/type = "value"
-tracks/7/path = NodePath("Slide:playing")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 1, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="BoxShape" id=15]
-extents = Vector3( 0.302323, 0.388551, 0.494657 )
 
 [sub_resource type="Animation" id=16]
 resource_name = "Switch"
@@ -394,60 +353,105 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=18]
-resource_name = "Switch"
-length = 0.5
+[sub_resource type="CylinderShape" id=18]
+radius = 1.13983
+height = 3.18314
+
+[sub_resource type="Animation" id=19]
+length = 4.0
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
+tracks/0/path = NodePath("Batterry_switch:translation:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("Inter_levier:rotation_degrees:y")
+tracks/1/path = NodePath("Batterry_switch:translation:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
 }
 tracks/2/type = "bezier"
-tracks/2/path = NodePath("Inter_levier:rotation_degrees:z")
+tracks/2/path = NodePath("Batterry_switch:translation:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
+tracks/3/type = "bezier"
+tracks/3/path = NodePath(".:translation:x")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.4 ),
+"points": PoolRealArray( 14.996, -0.25, 0, 0.25, 0, 14.996, -0.25, 0, 0.25, 0, 14.996, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath(".:translation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 1.427, -0.25, 0, 0.25, 0, 1.427, -0.25, 0, 0.25, 0, 1.427, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath(".:translation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( -12, -0.25, 0, 0.25, 0, -12, -0.25, 0, 0.25, 0, 7.5, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1, 4 )
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Switch:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Slide:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 1, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
 }
 
-[sub_resource type="CylinderShape" id=19]
+[sub_resource type="CylinderShape" id=20]
 radius = 1.43929
 height = 0.668333
 
-[sub_resource type="BoxShape" id=25]
+[sub_resource type="BoxShape" id=21]
 extents = Vector3( 2.43967, 1, 0.741609 )
 
-[sub_resource type="Animation" id=26]
+[sub_resource type="Animation" id=22]
 resource_name = "Animation_trap"
 length = 0.5
 tracks/0/type = "bezier"
@@ -493,18 +497,17 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CylinderShape" id=20]
+[sub_resource type="CylinderShape" id=23]
 radius = 1.45466
 height = 0.752724
 
-[sub_resource type="PlaneMesh" id=21]
+[sub_resource type="PlaneMesh" id=24]
 size = Vector2( 70, 55 )
 
-[sub_resource type="BoxShape" id=22]
+[sub_resource type="BoxShape" id=25]
 extents = Vector3( 0.833497, 1.47772, 0.129141 )
 
-[sub_resource type="Animation" id=23]
-resource_name = "Animation_door"
+[sub_resource type="Animation" id=26]
 length = 4.8
 tracks/0/type = "value"
 tracks/0/path = NodePath("AudioStreamPlayer3D:playing")
@@ -549,19 +552,19 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 4.5 )
 }
 
-[sub_resource type="BoxShape" id=28]
+[sub_resource type="BoxShape" id=27]
 extents = Vector3( 4.98627, 1, 0.399866 )
 
-[sub_resource type="BoxShape" id=29]
+[sub_resource type="BoxShape" id=28]
 extents = Vector3( 0.473265, 1, 4.33338 )
 
-[sub_resource type="BoxShape" id=30]
+[sub_resource type="BoxShape" id=29]
 extents = Vector3( 0.357504, 1, 4.62488 )
 
-[sub_resource type="BoxShape" id=31]
+[sub_resource type="BoxShape" id=30]
 extents = Vector3( 1.80555, 1, 0.427569 )
 
-[sub_resource type="BoxShape" id=27]
+[sub_resource type="BoxShape" id=31]
 extents = Vector3( 10.8391, 1, 0.445696 )
 
 [sub_resource type="BoxShape" id=32]
@@ -603,28 +606,28 @@ extents = Vector3( 2.15472, 1, 0.326007 )
 [sub_resource type="BoxShape" id=44]
 extents = Vector3( 0.392807, 1, 8.49412 )
 
-[sub_resource type="BoxShape" id=52]
+[sub_resource type="BoxShape" id=45]
 extents = Vector3( 1.54342, 1, 4.54872 )
 
-[sub_resource type="BoxShape" id=45]
+[sub_resource type="BoxShape" id=46]
 extents = Vector3( 0.379028, 1, 16.308 )
 
-[sub_resource type="BoxShape" id=46]
+[sub_resource type="BoxShape" id=47]
 extents = Vector3( 2.23217, 1, 0.352632 )
 
-[sub_resource type="BoxShape" id=47]
+[sub_resource type="BoxShape" id=48]
 extents = Vector3( 10.6075, 1, 0.365348 )
 
-[sub_resource type="BoxShape" id=48]
+[sub_resource type="BoxShape" id=49]
 extents = Vector3( 1.60744, 1, 0.334625 )
 
-[sub_resource type="BoxShape" id=49]
+[sub_resource type="BoxShape" id=50]
 extents = Vector3( 0.884901, 1, 2.18391 )
 
-[sub_resource type="BoxShape" id=50]
+[sub_resource type="BoxShape" id=51]
 extents = Vector3( 5.52542, 1, 2.18391 )
 
-[sub_resource type="BoxShape" id=51]
+[sub_resource type="BoxShape" id=52]
 extents = Vector3( 0.884901, 1, 2.18391 )
 
 [sub_resource type="BoxShape" id=53]
@@ -698,11 +701,12 @@ script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
 transform = Transform( 0.994951, -0.100362, -0.000157655, 0, -0.00157086, 0.999999, -0.100362, -0.99495, -0.00156293, 0, 0, 0 )
+visible = false
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Camera" type="Camera" parent="KinematicBody"]
-transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 9.53674e-07, 1.55755, 1.19209e-06 )
+transform = Transform( -1, 0, 3.25841e-07, 0, 1, 0, -3.25841e-07, 0, -1, 1.19209e-06, 1.55755, 9.53674e-07 )
 fov = 65.0
 
 [node name="RayCast" type="RayCast" parent="KinematicBody/Camera"]
@@ -710,17 +714,21 @@ enabled = true
 cast_to = Vector3( 0, 0, -10 )
 collision_mask = 2
 
+[node name="UI_helper" parent="KinematicBody/Camera" instance=ExtResource( 34 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66893e-06, 0, -1.09017 )
+
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 2 )
 
-[node name="Pivot_1" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99304, 0.0914832, -6.00048 )
+[node name="Pivot_1" type="StaticBody" parent="." groups=[
+"Action",
+"outline",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -17.9662, 0.0914832, -6.00048 )
 collision_layer = 2
 collision_mask = 2147483650
 script = ExtResource( 4 )
-
-[node name="Key_1" parent="Pivot_1" instance=ExtResource( 3 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.141824, 0 )
@@ -733,6 +741,9 @@ anims/Animation_pivot = SubResource( 4 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.21824, 0 )
 stream = ExtResource( 7 )
 unit_db = 80.0
+
+[node name="Key_1" parent="Pivot_1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160367, 0 )
 
 [node name="Door_Large_1" type="StaticBody" parent="."]
 transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, -2.6, 0.061, -7.507 )
@@ -753,24 +764,33 @@ transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0
 stream = ExtResource( 8 )
 unit_db = 20.0
 
-[node name="Pivot_2" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5093, 1.43056, -6.07769 )
+[node name="Pivot_2" type="StaticBody" parent="." groups=[
+"outline",
+]]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 7.5093, 1.52865, -6.07769 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 35 )
 
-[node name="Mirror_2" parent="Pivot_2" instance=ExtResource( 10 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+[node name="Mirror" parent="Pivot_2" instance=ExtResource( 10 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38776, 0 )
 shape = SubResource( 7 )
 
-[node name="Rotate_90_2" type="StaticBody" parent="."]
+[node name="Rotate_90" type="StaticBody" parent="." groups=[
+"outline",
+]]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 7.51137, 1.58045, -12.0239 )
+collision_layer = 2
+collision_mask = 2
+script = ExtResource( 36 )
 
-[node name="Rotate_90_2" parent="Rotate_90_2" instance=ExtResource( 9 )]
-
-[node name="CollisionShape" type="CollisionShape" parent="Rotate_90_2"]
+[node name="CollisionShape" type="CollisionShape" parent="Rotate_90"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.29729, 0 )
 shape = SubResource( 8 )
+
+[node name="Rotate_90" parent="Rotate_90" instance=ExtResource( 9 )]
 
 [node name="Door_eclipse" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.04542, 0, 2.54507 )
@@ -783,29 +803,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.38325, -1.48227 )
 shape = SubResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door_eclipse"]
-anims/Animation_door = SubResource( 24 )
+anims/Animation_door = SubResource( 10 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_eclipse"]
 stream = ExtResource( 32 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 11 )
+environment = SubResource( 12 )
 
-[node name="Bell" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.169, 3.88613, 4.32636 )
+[node name="Bell" type="StaticBody" parent="." groups=[
+"Action",
+"outline",
+]]
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 27.169, 3.88613, 4.32636 )
 collision_layer = 2147483650
 collision_mask = 2147483650
 script = ExtResource( 16 )
 
 [node name="Bell" parent="Bell" instance=ExtResource( 15 )]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Bell"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.302946, 1.20772, -3.81241 )
-shape = SubResource( 12 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.51756, 1.08978, -2.99075 )
+shape = SubResource( 13 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Bell"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 1.2, -3.8 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.48087, 1.2, -2.98466 )
 stream = ExtResource( 17 )
 attenuation_model = 2
 max_db = -16.794
@@ -912,30 +934,15 @@ omni_range = 3.0
 [node name="Abbey_1" parent="." instance=ExtResource( 1 )]
 
 [node name="Laser_source" parent="." instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.00538325 )
+
+[node name="RayCast" type="RayCast" parent="Laser_source"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, -16.5 )
+enabled = true
+cast_to = Vector3( 0, 0, 10.5 )
+collision_mask = 4
 
 [node name="Laser_receiver" parent="." instance=ExtResource( 20 )]
-
-[node name="Pivot_battery" type="StaticBody" parent="."]
-transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.996, 1.427, -12 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Pivot_battery"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38212, 0 )
-shape = SubResource( 13 )
-
-[node name="Batterry_switch" parent="Pivot_battery" instance=ExtResource( 11 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
-
-[node name="Batterry" parent="Pivot_battery" instance=ExtResource( 12 )]
-transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot_battery"]
-anims/Action = SubResource( 14 )
-
-[node name="Switch" type="AudioStreamPlayer3D" parent="Pivot_battery"]
-stream = ExtResource( 28 )
-
-[node name="Slide" type="AudioStreamPlayer3D" parent="Pivot_battery"]
-stream = ExtResource( 7 )
 
 [node name="3_Way" type="Spatial" parent="."]
 
@@ -946,7 +953,7 @@ collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="3_Way/Inter_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 
 [node name="Inter_base" parent="3_Way/Inter_1" instance=ExtResource( 29 )]
 
@@ -954,7 +961,7 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="3_Way/Inter_1"]
-anims/Switch = SubResource( 16 )
+anims/Switch = SubResource( 15 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="3_Way/Inter_1"]
 stream = ExtResource( 28 )
@@ -966,7 +973,7 @@ collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="3_Way/Inter_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 
 [node name="Inter_base" parent="3_Way/Inter_2" instance=ExtResource( 29 )]
 
@@ -974,7 +981,7 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="3_Way/Inter_2"]
-anims/Switch = SubResource( 17 )
+anims/Switch = SubResource( 16 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="3_Way/Inter_2"]
 stream = ExtResource( 28 )
@@ -986,7 +993,7 @@ collision_mask = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="3_Way/Inter_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 15 )
+shape = SubResource( 14 )
 
 [node name="Inter_base" parent="3_Way/Inter_3" instance=ExtResource( 29 )]
 
@@ -994,7 +1001,7 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="3_Way/Inter_3"]
-anims/Switch = SubResource( 18 )
+anims/Switch = SubResource( 17 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="3_Way/Inter_3"]
 stream = ExtResource( 28 )
@@ -1008,6 +1015,28 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 7.5 )
 [node name="Led_3" parent="3_Way" instance=ExtResource( 30 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 10.5 )
 
+[node name="Pivot_battery" type="StaticBody" parent="."]
+transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.996, 1.427, -12 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Pivot_battery"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38212, 0 )
+shape = SubResource( 18 )
+
+[node name="Batterry_switch" parent="Pivot_battery" instance=ExtResource( 11 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+
+[node name="Batterry" parent="Pivot_battery" instance=ExtResource( 12 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot_battery"]
+anims/Action = SubResource( 19 )
+
+[node name="Switch" type="AudioStreamPlayer3D" parent="Pivot_battery"]
+stream = ExtResource( 28 )
+
+[node name="Slide" type="AudioStreamPlayer3D" parent="Pivot_battery"]
+stream = ExtResource( 7 )
+
 [node name="Circuit_1" parent="." instance=ExtResource( 22 )]
 
 [node name="Pivot_90" type="StaticBody" parent="."]
@@ -1018,7 +1047,7 @@ transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_90"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -0.334196, 0, 0 )
-shape = SubResource( 19 )
+shape = SubResource( 20 )
 
 [node name="Circuit_2" parent="." instance=ExtResource( 24 )]
 
@@ -1030,10 +1059,10 @@ collision_mask = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1587, 0, 17.8611 )
-shape = SubResource( 25 )
+shape = SubResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Trap"]
-anims/Animation_trap = SubResource( 26 )
+anims/Animation_trap = SubResource( 22 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1408, 0.339669, 18.0871 )
@@ -1047,13 +1076,13 @@ transform = Transform( -1.62921e-07, -1, 0, -1.62921e-07, 2.65431e-14, 1, -1, 1.
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_180"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0.33, 0, 0 )
-shape = SubResource( 20 )
+shape = SubResource( 23 )
 
 [node name="Circuit_3" parent="." instance=ExtResource( 25 )]
 
 [node name="Ceiling" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 11, 9, 7.5 )
-mesh = SubResource( 21 )
+mesh = SubResource( 24 )
 material/0 = ExtResource( 31 )
 
 [node name="Door_Large_2" type="StaticBody" parent="."]
@@ -1065,10 +1094,10 @@ transform = Transform( 1, 0, -8.81073e-13, 0, 1, 0, 8.81073e-13, 0, 1, -0.506659
 
 [node name="CollisionShape" type="CollisionShape" parent="Door_Large_2"]
 transform = Transform( 1, 0, -8.52651e-14, 0, 1, 0, 8.52651e-14, 0, 1, 0, 1.49195, 0 )
-shape = SubResource( 22 )
+shape = SubResource( 25 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door_Large_2"]
-anims/Animation_door = SubResource( 23 )
+anims/Animation_door = SubResource( 26 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_Large_2"]
 transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0, 0.333333, 0, 0, 0 )
@@ -1081,25 +1110,25 @@ unit_db = 20.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.00041, 0, -19.5267 )
-shape = SubResource( 28 )
+shape = SubResource( 27 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5252, 0, -15.0175 )
-shape = SubResource( 29 )
+shape = SubResource( 28 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49163, 0, -15.0398 )
-shape = SubResource( 30 )
+shape = SubResource( 29 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9849, 0, -10.5392 )
-shape = SubResource( 31 )
+shape = SubResource( 30 )
 
 [node name="Limit_2" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.344, 0, -1.41183 )
-shape = SubResource( 27 )
+shape = SubResource( 31 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4887, 0, -10.4613 )
@@ -1157,37 +1186,37 @@ shape = SubResource( 44 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.487, 0, -9.00188 )
-shape = SubResource( 52 )
+shape = SubResource( 45 )
 
 [node name="Limit_4" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01217, 0, 17.2496 )
-shape = SubResource( 45 )
+shape = SubResource( 46 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 3.87574, 0, 33.5635 )
-shape = SubResource( 46 )
+shape = SubResource( 47 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0106, 0, 34.4975 )
-shape = SubResource( 47 )
+shape = SubResource( 48 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 26.2105, 0, 33.5478 )
-shape = SubResource( 48 )
+shape = SubResource( 49 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3692, 0, 14.892 )
-shape = SubResource( 49 )
+shape = SubResource( 50 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0419, 0, 14.892 )
-shape = SubResource( 50 )
+shape = SubResource( 51 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6454, 0, 14.892 )
-shape = SubResource( 51 )
+shape = SubResource( 52 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.494, 0, 7.02681 )
@@ -1276,3 +1305,8 @@ shape = SubResource( 72 )
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7609, -0.283657, 4.98108 )
 shape = SubResource( 73 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6.51944, 6.65175 )
+shadow_enabled = true
+omni_range = 13.0017

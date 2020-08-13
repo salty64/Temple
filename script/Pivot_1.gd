@@ -1,7 +1,5 @@
 extends StaticBody
 
-
-
 var done = false 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,4 +20,10 @@ func play():
 		$AudioStreamPlayer3D.play(0)
 		done=true
 		
-		
+
+func set_outline_true():
+	$Key_1/Meshoutline.visible=true
+
+	
+func set_outline_false():
+	$Key_1/Meshoutline.visible=false
