@@ -8,6 +8,7 @@ var SENSI = 0.5
 var mouse_speed:Vector2
 onready var raycast:RayCast = $Camera/RayCast
 var ray_coll:Node
+var ray_coll_old:Node = null
 var ray_have_collision := false
 
 
@@ -33,36 +34,47 @@ func _process(delta):
 	mouse_speed = Vector2.ZERO
 	
 	if ray_coll !=null :
+		
 		if ray_have_collision:
+			
+			if ray_coll_old != ray_coll and ray_coll_old!=null:
+				
+				$Camera/UI_helper/Left.visible=false
+				$Camera/UI_helper/Right.visible=false
+				if ray_coll_old.is_in_group("outline"):
+					ray_coll_old.set_outline_false()
+					
+
 			if ray_coll.is_in_group("outline"):
 				ray_coll.set_outline_true()
+			
+			if ray_coll.is_in_group("left"):
+				$Camera/UI_helper/Left.visible=true
+				if Input.is_action_just_pressed("mouse_left"):
+					if ray_coll.is_in_group("action"):
+						ray_coll.play()
 				
-			if Input.is_action_just_pressed("mouse_left"):
-				if ray_coll.is_in_group("Action"):
-					ray_coll.play()
+			
+			if ray_coll.is_in_group("right"):
+				$Camera/UI_helper/Right.visible=true
+				if Input.is_action_just_pressed("mouse_right"):
+					if ray_coll.is_in_group("action"):
+						ray_coll.play()
+			
+			ray_coll_old = ray_coll	
+			
+						
 		else :
 			if ray_coll.is_in_group("outline"):
 				ray_coll.set_outline_false()
-			ray_coll=null
-
-#			$Camera/UI_helper/Left.visible=false
-#			$Camera/UI_helper/Right.visible=false
-
 		
-#				if ray_coll.name=="Pivot_1" and get_parent().get_node("Pivot_1").done==false:
-#				var point = raycast.get_collision_point()
-#				$Camera/UI_helper/Left.visible=true
+				ray_coll=null
+			
+			$Camera/UI_helper/Left.visible=false
+			$Camera/UI_helper/Right.visible=false
 
-#
-#			if ray_coll.name=="Pivot_2":
-#
-#				$Camera/UI_helper/Left.visible=true
 
-#			if ray_coll.name=="Rotate_90":
-
-#				$Camera/UI_helper/Right.visible=true
-
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !is_on_floor():
 		dir.y-=1
 	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized()*SPEED,Vector3.UP,true)

@@ -1,4 +1,4 @@
-extends Spatial
+	extends Spatial
 
 
 func _ready():
