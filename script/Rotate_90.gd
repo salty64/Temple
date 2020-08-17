@@ -10,12 +10,14 @@ func _ready():
 func play():
 	if !done :
 		if mirror:
-			$"../Pivot_2/Mirror".rotate_y(PI/2)
+			$"../Column/Mirror".rotate_y(PI/2)
+			$"../Column/Reflector/RayCast".rotate_y(PI)
 		$Rotate_90.rotate_y(PI/2)	
 		done=true
 	else :
 		if mirror:
-			$"../Pivot_2/Mirror".rotate_y(-PI/2)
+			$"../Column/Mirror".rotate_y(-PI/2)
+			$"../Column/Reflector/RayCast".rotate_y(-PI)
 		$Rotate_90.rotate_y(-PI/2)
 		done=false
 	$AudioStreamPlayer3D.play(0)	 

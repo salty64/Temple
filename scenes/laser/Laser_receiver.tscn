@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://asset/Energy.material" type="Material" id=1]
+[ext_resource path="res://asset/Laser_receiver.glb" type="PackedScene" id=2]
+
+[sub_resource type="Animation" id=2]
+resource_name = "OFF"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("mergedBlocksClone:material/2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), null ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "ON"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("mergedBlocksClone:material/2")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ null, ExtResource( 1 ) ]
+}
+
+[node name="Laser_receiver" instance=ExtResource( 2 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+anims/OFF = SubResource( 2 )
+anims/ON = SubResource( 1 )

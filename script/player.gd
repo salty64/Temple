@@ -7,9 +7,18 @@ var SPEED = 10.0
 var SENSI = 0.5
 var mouse_speed:Vector2
 onready var raycast:RayCast = $Camera/RayCast
+onready var raycast_Laser:RayCast = $"../Laser_source/RayCast_Laser"
+onready var beam:Node = $"../Laser_source/RayCast_Laser/beam"
+onready var raycast_Laser_reflection:RayCast = $"../Column/Reflector/RayCast"
+onready var beam_reflection:Node = $"../Column/Reflector/RayCast/Spatial"
+
+
 var ray_coll:Node
 var ray_coll_old:Node = null
 var ray_have_collision := false
+
+var ray_coll_reflexion:Node
+var ray_reflection_have_collision:= false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -73,6 +82,16 @@ func _process(delta):
 			$Camera/UI_helper/Left.visible=false
 			$Camera/UI_helper/Right.visible=false
 
+	if ray_coll_reflexion !=null :
+		if ray_reflection_have_collision:
+			print(ray_coll_reflexion.name)
+			if ray_coll_reflexion.is_in_group("energy"):
+				ray_coll_reflexion.On()
+				pass
+		else:
+			if ray_coll_reflexion.is_in_group("energy"):
+				ray_coll_reflexion.Off()
+				pass
 
 func _physics_process(_delta):
 	if !is_on_floor():
@@ -84,7 +103,19 @@ func _physics_process(_delta):
 	else:
 		ray_have_collision = false
 
-
-
-
+	if raycast_Laser.is_colliding():
+		var length =  raycast_Laser.global_transform.origin.distance_to(raycast_Laser.get_collision_point())
+		beam.translation.z = length/2
+		# beam.scale.y = length
+		beam.mesh.set_height(length)
+	
+	if raycast_Laser_reflection.is_colliding():
+		
+		ray_coll_reflexion = raycast_Laser_reflection.get_collider()
+		var length_reflection =  raycast_Laser_reflection.global_transform.origin.distance_to(raycast_Laser_reflection.get_collision_point())
+		beam_reflection.translation.x = -length_reflection/2
+		beam_reflection.scale.x = length_reflection
+		ray_reflection_have_collision = true
+	else:
+		ray_reflection_have_collision = false	 
 
