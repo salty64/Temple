@@ -1,13 +1,11 @@
 extends StaticBody
 
-
-var bas = false
-export(int) var id
+var laser_pos= false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$AnimationPlayer.play("Switch")
-	$AnimationPlayer.seek(0,true)
+	$AnimationPlayer.play("Action")
+	$AnimationPlayer.seek(4,true)
 	$AnimationPlayer.stop(true)
 	
 
@@ -17,23 +15,15 @@ func _ready():
 #	pass
 
 func play():
-	if !bas :
+	if !laser_pos :
+		$AnimationPlayer.play_backwards("Action")
+		$AudioStreamPlayer3D.play(0)
+		laser_pos=true
+	else :
 		$AnimationPlayer.play("Switch")
 		$AudioStreamPlayer3D.play(0)
-		bas=true
-		get_parent().check(id)
-		
-	else :
-		$AnimationPlayer.play_backwards("Switch")
-		$AudioStreamPlayer3D.play(0)
-		bas=false
+		laser_pos=false
 
-func reset():
-	if bas:
-		$AnimationPlayer.play_backwards("Switch")
-		$AudioStreamPlayer3D.play(0)
-		bas=false
-		
 
 func set_outline_true():
 	$Inter_levier/Meshoutline.visible=true

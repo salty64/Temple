@@ -28,6 +28,7 @@ func play():
 		
 
 func set_outline_true():
+
 	$Circle_180/Meshoutline.visible=true
 	
 	

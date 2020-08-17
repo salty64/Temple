@@ -17,7 +17,8 @@ var ray_coll:Node
 var ray_coll_old:Node = null
 var ray_have_collision := false
 
-var ray_coll_reflexion:Node
+var ray_coll_reflection:Node
+var ray_coll_reflection_old:Node = null
 var ray_reflection_have_collision:= false
 
 
@@ -82,16 +83,25 @@ func _process(delta):
 			$Camera/UI_helper/Left.visible=false
 			$Camera/UI_helper/Right.visible=false
 
-	if ray_coll_reflexion !=null :
+	if ray_coll_reflection !=null :
 		if ray_reflection_have_collision:
-			print(ray_coll_reflexion.name)
-			if ray_coll_reflexion.is_in_group("energy"):
-				ray_coll_reflexion.On()
-				pass
+			
+			if ray_coll_reflection.is_in_group("energy"):
+				ray_coll_reflection.On()
+				ray_coll_reflection_old = ray_coll_reflection
+
+			if ray_coll_reflection_old !=null and ray_coll_reflection_old.is_in_group("energy") and ray_coll_reflection.is_in_group("player"):
+				ray_coll_reflection_old.Off()
+				
 		else:
-			if ray_coll_reflexion.is_in_group("energy"):
-				ray_coll_reflexion.Off()
-				pass
+			if ray_coll_reflection.is_in_group("energy"):
+				ray_coll_reflection.Off()
+				
+			
+	
+				
+
+
 
 func _physics_process(_delta):
 	if !is_on_floor():
@@ -111,7 +121,7 @@ func _physics_process(_delta):
 	
 	if raycast_Laser_reflection.is_colliding():
 		
-		ray_coll_reflexion = raycast_Laser_reflection.get_collider()
+		ray_coll_reflection = raycast_Laser_reflection.get_collider()
 		var length_reflection =  raycast_Laser_reflection.global_transform.origin.distance_to(raycast_Laser_reflection.get_collision_point())
 		beam_reflection.translation.x = -length_reflection/2
 		beam_reflection.scale.x = length_reflection
