@@ -1,8 +1,9 @@
-extends Spatial
+	extends Spatial
 
 
 func _ready():
-	$Ambiance.play(0)
+	# $Ambiance.play(0)
+	pass
 
 
 

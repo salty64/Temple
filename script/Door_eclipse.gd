@@ -1,15 +1,13 @@
 extends StaticBody
 
 
-
 var done = false 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# $AnimationPlayer.play("Animation_door")
-	# $AnimationPlayer.seek(0,true)
-	# $AnimationPlayer.stop(true)
-	pass
+	$AnimationPlayer.play("Animation_door")
+	$AnimationPlayer.seek(0,true)
+	$AnimationPlayer.stop(true)
 	
 
 
@@ -20,7 +18,5 @@ func _ready():
 func play():
 	if !done :
 		$AnimationPlayer.play("Animation_door")
-		$AudioStreamPlayer3D.play(0)
 		done=true
-		
 		
