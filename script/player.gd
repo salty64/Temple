@@ -5,10 +5,6 @@ var SPEED = 10.0
 var SENSI = 0.5
 var mouse_speed: Vector2
 onready var raycast: RayCast = $Camera/RayCast
-onready var raycast_Laser: RayCast = $"../Laser_source/RayCast_Laser"
-onready var beam: Node = $"../Laser_source/RayCast_Laser/beam"
-onready var raycast_Laser_reflection: RayCast = $"../Column/Reflector/RayCast"
-onready var beam_reflection: Node = $"../Column/Reflector/RayCast/Spatial"
 
 var ray_coll: Node
 var ray_coll_old: Node = null
@@ -103,28 +99,10 @@ func _process(delta):
 func _physics_process(_delta):
 	if ! is_on_floor():
 		dir.y -= 1
+		
 	move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized() * SPEED, Vector3.UP, true)
 	if raycast.is_colliding():
 		ray_coll = raycast.get_collider()
 		ray_have_collision = true
 	else:
 		ray_have_collision = false
-
-	if raycast_Laser.is_colliding():
-		var length = raycast_Laser.global_transform.origin.distance_to(
-			raycast_Laser.get_collision_point()
-		)
-		beam.translation.z = length / 2
-		# beam.scale.y = length
-		beam.mesh.set_height(length)
-
-	if raycast_Laser_reflection.is_colliding():
-		ray_coll_reflection = raycast_Laser_reflection.get_collider()
-		var length_reflection = raycast_Laser_reflection.global_transform.origin.distance_to(
-			raycast_Laser_reflection.get_collision_point()
-		)
-		beam_reflection.translation.x = -length_reflection / 2
-		beam_reflection.scale.x = length_reflection
-		ray_reflection_have_collision = true
-	else:
-		ray_reflection_have_collision = false

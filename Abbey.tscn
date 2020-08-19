@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=135 format=2]
+=======
+[gd_scene load_steps=134 format=2]
+>>>>>>> master
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -48,7 +52,12 @@
 [ext_resource path="res://script/5_Way.gd" type="Script" id=46]
 [ext_resource path="res://script/Door_eclipse.gd" type="Script" id=47]
 [ext_resource path="res://script/Pivot_battery.gd" type="Script" id=48]
+<<<<<<< HEAD
 [ext_resource path="res://script/Trap.gd" type="Script" id=49]
+=======
+[ext_resource path="res://script/LaserSource.gd" type="Script" id=49]
+[ext_resource path="res://script/Reflector.gd" type="Script" id=50]
+>>>>>>> master
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -111,7 +120,7 @@ tracks/3/keys = {
 height = 2.4038
 
 [sub_resource type="BoxShape" id=6]
-extents = Vector3( 0.0450717, 0.743881, 0.417144 )
+extents = Vector3( 0.0083426, 0.777893, 0.446669 )
 
 [sub_resource type="CylinderMesh" id=7]
 top_radius = 0.05
@@ -719,7 +728,12 @@ script = ExtResource( 19 )
 [node name="KinematicBody" type="KinematicBody" parent="." groups=[
 "player",
 ]]
+<<<<<<< HEAD
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41971, 6.97879, 10.3745 )
+=======
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40203, 2.66174, -8.2477 )
+collision_layer = 2147483649
+>>>>>>> master
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
@@ -786,23 +800,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.087, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26471, 0 )
 shape = SubResource( 5 )
 
-[node name="Reflector" type="StaticBody" parent="Column"]
+[node name="Reflector" type="StaticBody" parent="Column" groups=[
+"energy",
+]]
 collision_layer = 5
 collision_mask = 5
+script = ExtResource( 50 )
 
 [node name="Plan_miroir" type="CollisionShape" parent="Column/Reflector"]
-transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 1.48537, 0 )
+transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -0.0220523, 1.485, 0.0220523 )
 shape = SubResource( 6 )
 
-[node name="RayCast" type="RayCast" parent="Column/Reflector"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47, 0 )
+[node name="RayCast" type="RayCast" parent="Column/Reflector/Plan_miroir"]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, 0 )
 enabled = true
 cast_to = Vector3( -31, 0, 0 )
 
-[node name="Spatial" type="Spatial" parent="Column/Reflector/RayCast"]
-
-[node name="beam2" type="MeshInstance" parent="Column/Reflector/RayCast/Spatial"]
-transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 0.00566101, 0, 0 )
+[node name="beam" type="MeshInstance" parent="Column/Reflector/Plan_miroir"]
+transform = Transform( -1.15203e-07, 0.707107, -0.707107, -1, -1.62921e-07, 0, -1.15203e-07, 0.707107, 0.707107, 0, 0, 0 )
 mesh = SubResource( 7 )
 material/0 = ExtResource( 39 )
 
@@ -831,11 +846,7 @@ transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0
 stream = ExtResource( 8 )
 unit_db = 20.0
 
-[node name="Rotate_90" type="StaticBody" parent="." groups=[
-"action",
-"outline",
-"right",
-]]
+[node name="Rotate_90" type="StaticBody" parent="."]
 transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 7.5, 1.5, -12 )
 collision_layer = 3
 collision_mask = 3
@@ -1015,7 +1026,10 @@ script = ExtResource( 40 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2475, 2.98705, -6.00253 )
 shape = SubResource( 19 )
 
-[node name="Laser_source" parent="." instance=ExtResource( 21 )]
+[node name="Laser_source" parent="." groups=[
+"energy",
+] instance=ExtResource( 21 )]
+script = ExtResource( 49 )
 
 [node name="RayCast_Laser" type="RayCast" parent="Laser_source"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 3, -16.5 )
@@ -1024,8 +1038,8 @@ cast_to = Vector3( 0, 0, 10.5 )
 collision_mask = 5
 collide_with_areas = true
 
-[node name="beam" type="MeshInstance" parent="Laser_source/RayCast_Laser"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+[node name="beam" type="MeshInstance" parent="Laser_source"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 7.5, 3, -16.5 )
 mesh = SubResource( 20 )
 material/0 = ExtResource( 39 )
 
@@ -1271,7 +1285,7 @@ transform = Transform( -1.62921e-07, -1, 1.62921e-07, 0, -1.62921e-07, -1, 1, -1
 [node name="Circuit_3" parent="." instance=ExtResource( 25 )]
 
 [node name="Ceiling" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 11, 9, 7.5 )
+transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 11.0381, 8.97697, 7.49146 )
 mesh = SubResource( 33 )
 material/0 = ExtResource( 31 )
 
@@ -1514,8 +1528,12 @@ mesh = SubResource( 83 )
 material/0 = ExtResource( 31 )
 
 [node name="PoV" type="Camera" parent="."]
-transform = Transform( 0.665822, -0.188334, 0.72195, -0.159539, 0.9093, 0.384344, -0.728855, -0.371084, 0.575385, 17.0258, 4.2757, 12.0537 )
-fov = 75.0
+transform = Transform( 0.892018, -0.0340032, 0.450719, -0.159539, 0.9093, 0.384344, -0.422908, -0.414749, 0.805687, 15.3818, 4.2757, 12.0537 )
+fov = 105.5
+[connection signal="canRotate" from="Column" to="Rotate_90" method="_on_Column_canRotate"]
+[connection signal="cantRotate" from="Column" to="Rotate_90" method="_on_Column_cantRotate"]
+[connection signal="animation_finished" from="Column/AnimationPlayer" to="Column" method="_on_AnimationPlayer_animation_finished"]
+[connection signal="laserTouch" from="Laser_receiver" to="Door_eclipse" method="_on_laserTouch"]
 
 [node name="Door_Laser" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.515, 0, 14.631 )
@@ -1530,4 +1548,3 @@ material/0 = ExtResource( 39 )
 [node name="CollisionShape" type="CollisionShape" parent="Door_Laser"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.441484, 0, 0.38315 )
 shape = SubResource( 85 )
-[connection signal="animation_finished" from="Column/AnimationPlayer" to="Rotate_90" method="_on_AnimationPlayer_animation_finished"]

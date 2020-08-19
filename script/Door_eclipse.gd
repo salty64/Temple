@@ -28,3 +28,8 @@ func play(state: bool):
 		$AnimationPlayer.play_backwards("Animation_door")
 		$AudioStreamPlayer3D.play(0)
 		done = false
+
+
+func _on_laserTouch(touch):
+	play(touch)
+	pass  # Replace with function body.

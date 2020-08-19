@@ -1,33 +1,44 @@
 extends StaticBody
 
 var done = false
-var mirror = false 
+var mirror = false
+
+var column:Spatial
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	column = $"../Column"
 	pass # Replace with function body.
 
 func play():
 	if !done :
-		if mirror:
-			$"../Column/Mirror".rotate_y(PI/2)
-			$"../Column/Reflector/RayCast".rotate_y(PI)
-		$Rotate_90.rotate_y(PI/2)	
+		column.set_rotation90()
+		$Rotate_90.rotate_y(PI/2)
 		done=true
 	else :
-		if mirror:
-			$"../Column/Mirror".rotate_y(-PI/2)
-			$"../Column/Reflector/RayCast".rotate_y(-PI)
+		column.unset_rotation90()
 		$Rotate_90.rotate_y(-PI/2)
 		done=false
-	$AudioStreamPlayer3D.play(0)	 
+	
+	$AudioStreamPlayer3D.play(0)
+	pass
 
 func set_outline_true():
 	$Rotate_90/Meshoutline.visible=true
-
 	
 func set_outline_false():
 	$Rotate_90/Meshoutline.visible=false
 
-func _on_AnimationPlayer_animation_finished(_toto):
-	mirror=!mirror
+func _on_Column_canRotate():
+	add_to_group("outline")
+	add_to_group("action")
+	add_to_group("right")
+	pass # Replace with function body.
+
+
+func _on_Column_cantRotate():
+	set_outline_false()
+	remove_from_group("outline")
+	remove_from_group("action")
+	remove_from_group("right")
+	pass # Replace with function body.
