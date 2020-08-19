@@ -1,8 +1,9 @@
 # Called when the node enters the scene tree for the first time.
 extends StaticBody
 
-var done = false
+signal laserTouch(touch)
 
+var done = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,13 +17,17 @@ func _ready():
 #	pass
 
 
-func On():
+func on_laser_touch():
+	emit_signal("laserTouch", true)
+	
 	if ! done:
 		$Laser_receiver/AnimationPlayer.play("ON")
 		done = true
 
 
-func Off():
+func on_laser_untouch():
+	emit_signal("laserTouch", false)
+	
 	if done:
 		$Laser_receiver/AnimationPlayer.play("OFF")
 		done = false
