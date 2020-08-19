@@ -2,7 +2,8 @@
 
 [ext_resource path="res://asset/outline.tres" type="Material" id=1]
 [ext_resource path="res://asset/Batterry.glb" type="PackedScene" id=2]
-[ext_resource path="res://asset/Energy.material" type="Material" id=3]
+[ext_resource path="res://asset/Energy-old.material" type="Material" id=3]
+
 
 [sub_resource type="ArrayMesh" id=1]
 surfaces/0 = {

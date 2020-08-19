@@ -30,7 +30,7 @@ func check(id):
 				sequence_1 = true
 				#  camera change
 				$"../Pivot_battery".play()
-				$"../PoV".make_current()
+				$"../Pivot_battery/Batterry/PoV".make_current()
 				$"../Secret".play(0)
 				yield($"../Pivot_battery/AnimationPlayer", "animation_finished")
 				$"../KinematicBody/Camera".make_current()

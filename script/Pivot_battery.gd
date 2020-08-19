@@ -1,7 +1,7 @@
 extends StaticBody
 
 var laser_pos = false
-var charged = false
+var is_charged = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -9,7 +9,7 @@ func _ready():
 	$AnimationPlayer.play("Action")
 	$AnimationPlayer.seek(4, true)
 	$AnimationPlayer.stop(true)
-	charged()
+	charge()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,6 +24,7 @@ func play():
 		laser_pos = true
 	else:
 		$AnimationPlayer.play("Action")
+
 		yield($AnimationPlayer, "animation_finished")
 		# $AudioStreamPlayer3D.play(0)
 		# laser_pos = false
@@ -31,6 +32,15 @@ func play():
 		$"../Circuit_2/AnimationPlayer".play("Energy_ON")
 		$"../Guide_90/AnimationPlayer".play("Energy_ON")
 		$"../Pivot_90/Circle_90/AnimationPlayer".play("Energy_ON")
+		$"../Guide_180/AnimationPlayer".play("Energy_ON")
+
+		$"../Pivot_180".add_to_group("outline")
+		$"../Pivot_90".add_to_group("outline")
+		$"../Pivot_180".add_to_group("right")
+		$"../Pivot_90".add_to_group("right")
+		$"../Pivot_180".add_to_group("action")
+		$"../Pivot_90".add_to_group("action")
+		$"../Trap".add_to_group("trap")
 
 
 func set_outline_true():
@@ -41,9 +51,9 @@ func set_outline_false():
 	$Batterry/Meshoutline.visible = false
 
 
-func charged():
+func charge():
 	add_to_group("action")
 	add_to_group("left")
 	add_to_group("outline")
 	$"../Pivot_battery/Batterry/AnimationPlayer".play("Energy")
-	charged = true
+	is_charged = true
