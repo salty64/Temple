@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=135 format=2]
-=======
 [gd_scene load_steps=134 format=2]
->>>>>>> master
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -52,12 +48,8 @@
 [ext_resource path="res://script/5_Way.gd" type="Script" id=46]
 [ext_resource path="res://script/Door_eclipse.gd" type="Script" id=47]
 [ext_resource path="res://script/Pivot_battery.gd" type="Script" id=48]
-<<<<<<< HEAD
-[ext_resource path="res://script/Trap.gd" type="Script" id=49]
-=======
 [ext_resource path="res://script/LaserSource.gd" type="Script" id=49]
 [ext_resource path="res://script/Reflector.gd" type="Script" id=50]
->>>>>>> master
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0
@@ -716,24 +708,14 @@ extents = Vector3( 35.5036, 0.316446, 36.1949 )
 [sub_resource type="CubeMesh" id=83]
 size = Vector3( 0.1, 5, 5 )
 
-[sub_resource type="CubeMesh" id=84]
-size = Vector3( 6, 9, 2 )
-
-[sub_resource type="BoxShape" id=85]
-extents = Vector3( 3.1259, 1, 1.0945 )
-
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 19 )
 
 [node name="KinematicBody" type="KinematicBody" parent="." groups=[
 "player",
 ]]
-<<<<<<< HEAD
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.41971, 6.97879, 10.3745 )
-=======
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.40203, 2.66174, -8.2477 )
 collision_layer = 2147483649
->>>>>>> master
 script = ExtResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="KinematicBody"]
@@ -865,7 +847,7 @@ anims/Rotate_90 = SubResource( 12 )
 stream = ExtResource( 38 )
 
 [node name="Door_eclipse" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.44472, 0, 2.54507 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5 )
 script = ExtResource( 47 )
 
 [node name="Door_eclipse" parent="Door_eclipse" instance=ExtResource( 14 )]
@@ -1195,7 +1177,11 @@ script = ExtResource( 45 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 16.5 )
 script = ExtResource( 45 )
 
-[node name="Pivot_battery" type="StaticBody" parent="."]
+[node name="Pivot_battery" type="StaticBody" parent="." groups=[
+"action",
+"left",
+"outline",
+]]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.996, 1.427, -12 )
 collision_layer = 3
 collision_mask = 3
@@ -1247,7 +1233,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 4.5, 22.5 )
 [node name="Trap" type="StaticBody" parent="."]
 collision_layer = 4
 collision_mask = 4
-script = ExtResource( 49 )
 
 [node name="Trap" parent="Trap" instance=ExtResource( 26 )]
 
@@ -1534,17 +1519,3 @@ fov = 105.5
 [connection signal="cantRotate" from="Column" to="Rotate_90" method="_on_Column_cantRotate"]
 [connection signal="animation_finished" from="Column/AnimationPlayer" to="Column" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="laserTouch" from="Laser_receiver" to="Door_eclipse" method="_on_laserTouch"]
-
-[node name="Door_Laser" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.515, 0, 14.631 )
-collision_layer = 3
-collision_mask = 3
-
-[node name="Door" type="MeshInstance" parent="Door_Laser"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 3.5, 0.4 )
-mesh = SubResource( 84 )
-material/0 = ExtResource( 39 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Door_Laser"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.441484, 0, 0.38315 )
-shape = SubResource( 85 )
