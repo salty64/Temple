@@ -22,8 +22,7 @@ var ray_reflection_have_collision := false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$Camera.rotation.x = 0
-
+	$Camera.rotation = Vector3.ZERO
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -35,12 +34,12 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	dir = Vector3(
-		int(Input.is_action_pressed("ui_left")) - int(Input.is_action_pressed("ui_right")),
+		int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")),
 		0,
-		int(Input.is_action_pressed("ui_up")) - int(Input.is_action_pressed("ui_down"))
+		int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
 	)
 
-	$Camera.rotate_x(mouse_speed.y * SENSI * delta)
+	$Camera.rotate_x(-mouse_speed.y * SENSI * delta)
 	$Camera.rotation.x = clamp($Camera.rotation.x, -0.8, 0.8)
 
 	rotate_y(-(mouse_speed.x * SENSI * delta))
