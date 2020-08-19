@@ -1,4 +1,5 @@
 extends KinematicBody
+class_name Player
 
 var dir: Vector3
 var SPEED = 10.0
