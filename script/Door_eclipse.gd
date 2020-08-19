@@ -34,3 +34,8 @@ func play(state:bool):
 		done=false
 
 		
+
+
+func _on_laserTouch(touch):
+	play(touch)
+	pass # Replace with function body.
