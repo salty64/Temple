@@ -13,7 +13,7 @@ func _ready():
 
 
 func trap():
-	if ! is_trap:
+	if !is_trap:
 		play()
 		$"../Door_laser".translate(Vector3(0, 10, 0))
 		is_trap = true
@@ -26,7 +26,8 @@ func untrap():
 
 
 func _on_Trap_body_entered(body):
-	print("notrap")
+	if body is Player:
+		trap()
 	# if $"../Trap".is_in_group("trap"):
 	# 	print("trap")
 	# 	trap()
