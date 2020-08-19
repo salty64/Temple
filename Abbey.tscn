@@ -462,7 +462,7 @@ tracks/7/keys = {
 radius = 1.43929
 height = 0.668333
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=30]
 length = 0.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
@@ -495,7 +495,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 )
 }
 
-[sub_resource type="BoxShape" id=30]
+[sub_resource type="BoxShape" id=31]
 extents = Vector3( 2.43967, 2.86908, 0.843103 )
 
 [sub_resource type="CylinderShape" id=32]
@@ -732,7 +732,7 @@ max_db = -16.794
 [node name="KinematicBody" type="KinematicBody" parent="." groups=[
 "player",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.89342, 4.55478, 9.66488 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02883, 4.55478, -7.71902 )
 collision_layer = 2147483653
 collision_mask = 5
 script = ExtResource( 2 )
@@ -1160,11 +1160,7 @@ script = ExtResource( 45 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 16.5 )
 script = ExtResource( 45 )
 
-[node name="Pivot_battery" type="StaticBody" parent="." groups=[
-"action",
-"left",
-"outline",
-]]
+[node name="Pivot_battery" type="StaticBody" parent="."]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.996, 1.427, -12 )
 collision_layer = 3
 collision_mask = 3
@@ -1216,14 +1212,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 4.5, 22.5 )
 [node name="Trap" type="Area" parent="."]
 input_ray_pickable = false
 monitorable = false
-collision_layer = 5
-collision_mask = 5
+collision_mask = 2147483649
 script = ExtResource( 51 )
 
 [node name="Trap" parent="Trap" instance=ExtResource( 26 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Trap"]
-anims/Animation_trap = SubResource( 31 )
+anims/Animation_trap = SubResource( 30 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0816, 0.339669, 17.9084 )
@@ -1231,7 +1226,7 @@ stream = ExtResource( 33 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.088, 0, 18.0712 )
-shape = SubResource( 30 )
+shape = SubResource( 31 )
 
 [node name="Pivot_180" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 4.5, 24 )

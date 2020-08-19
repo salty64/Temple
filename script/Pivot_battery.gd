@@ -9,7 +9,6 @@ func _ready():
 	$AnimationPlayer.play("Action")
 	$AnimationPlayer.seek(4, true)
 	$AnimationPlayer.stop(true)
-	charge()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,24 +22,25 @@ func play():
 		# $AudioStreamPlayer3D.play(0)
 		laser_pos = true
 	else:
-		$AnimationPlayer.play("Action")
+		if is_charged:
+			$AnimationPlayer.play("Action")
 
-		yield($AnimationPlayer, "animation_finished")
-		# $AudioStreamPlayer3D.play(0)
-		# laser_pos = false
-		$"../Circuit_1/AnimationPlayer".play("Energy")
-		$"../Circuit_2/AnimationPlayer".play("Energy_ON")
-		$"../Guide_90/AnimationPlayer".play("Energy_ON")
-		$"../Pivot_90/Circle_90/AnimationPlayer".play("Energy_ON")
-		$"../Guide_180/AnimationPlayer".play("Energy_ON")
+			yield($AnimationPlayer, "animation_finished")
+			# $AudioStreamPlayer3D.play(0)
+			# laser_pos = false
+			$"../Circuit_1/AnimationPlayer".play("Energy")
+			$"../Circuit_2/AnimationPlayer".play("Energy_ON")
+			$"../Guide_90/AnimationPlayer".play("Energy_ON")
+			$"../Pivot_90/Circle_90/AnimationPlayer".play("Energy_ON")
+			$"../Guide_180/AnimationPlayer".play("Energy_ON")
 
-		$"../Pivot_180".add_to_group("outline")
-		$"../Pivot_90".add_to_group("outline")
-		$"../Pivot_180".add_to_group("right")
-		$"../Pivot_90".add_to_group("right")
-		$"../Pivot_180".add_to_group("action")
-		$"../Pivot_90".add_to_group("action")
-		$"../Trap".add_to_group("trap")
+			$"../Pivot_180".add_to_group("outline")
+			$"../Pivot_90".add_to_group("outline")
+			$"../Pivot_180".add_to_group("right")
+			$"../Pivot_90".add_to_group("right")
+			$"../Pivot_180".add_to_group("action")
+			$"../Pivot_90".add_to_group("action")
+			$"../Trap".add_to_group("trap")
 
 
 func set_outline_true():
