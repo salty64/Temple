@@ -4,6 +4,7 @@ var is_trap = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AudioStreamPlayer3D.stream.loop = false
 	pass
 
 
@@ -13,7 +14,7 @@ func _ready():
 
 
 func trap():
-	if !is_trap:
+	if ! is_trap:
 		play()
 		$"../Door_laser".translate(Vector3(0, 10, 0))
 		is_trap = true
@@ -21,16 +22,12 @@ func trap():
 
 func untrap():
 	if is_trap:
-		play()
 		$"../Door_laser".translate(Vector3(0, -10, 0))
 
 
 func _on_Trap_body_entered(body):
-	if body is Player:
+	if $"../Trap".is_in_group("trap"):
 		trap()
-	# if $"../Trap".is_in_group("trap"):
-	# 	print("trap")
-	# 	trap()
 
 
 func play():
