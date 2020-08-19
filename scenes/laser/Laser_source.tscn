@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://asset/Energy.material" type="Material" id=1]
+[ext_resource path="res://asset/Energy-old.material" type="Material" id=1]
 [ext_resource path="res://asset/Laser_source.glb" type="PackedScene" id=2]
+
 
 [node name="Laser_source" instance=ExtResource( 2 )]
 

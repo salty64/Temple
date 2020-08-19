@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://asset/Energy.material" type="Material" id=1]
+[ext_resource path="res://asset/Energy-old.material" type="Material" id=1]
 [ext_resource path="res://asset/Circle_90.glb" type="PackedScene" id=2]
 [ext_resource path="res://sound/393288__dsa98__56-ruedas-de-carrito-consolidated.wav" type="AudioStream" id=3]
 [ext_resource path="res://asset/outline.tres" type="Material" id=4]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "Energy_OFF"
