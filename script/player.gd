@@ -50,6 +50,7 @@ func _process(delta):
 
 				if ray_coll.is_in_group("outline"):
 					ray_coll.set_outline_true()
+					gui_pos(raycast.get_collision_point())
 
 				if ray_coll.is_in_group("left"):
 					$Camera/UI_helper/Left.visible = true
@@ -63,7 +64,7 @@ func _process(delta):
 						if ray_coll.is_in_group("action"):
 							ray_coll.play()
 
-				ray_coll_old = ray_coll
+					ray_coll_old = ray_coll
 
 			else:
 				if ray_coll.is_in_group("outline"):
@@ -113,3 +114,9 @@ func _on_End_body_entered(body):
 	tween.start()
 	yield(tween, "tween_all_completed")
 	get_tree().quit()
+
+
+func gui_pos(pos):
+	var ecart: float
+	ecart = $Camera.translation.distance_to(pos)
+	$Camera/UI_helper.translation.z = -ecart / 9
