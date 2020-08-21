@@ -28,6 +28,7 @@ func play():
 		$Circle_180/AnimationPlayer.play_backwards("Energy_Switch")
 		$"../Circuit_3/AnimationPlayer".play("Energy_OFF")
 		$"../Guide_180/AnimationPlayer".play("Energy_ON")
+		$"../Door_Large_Exit".play()
 
 		done = false
 

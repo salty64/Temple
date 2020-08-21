@@ -3,6 +3,9 @@ extends StaticBody
 var laser_pos = false
 var is_charged = false
 
+onready var raycast: RayCast = $"../Column/Reflector/Plan_miroir/RayCast"
+var ray_coll: Node
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,9 +14,11 @@ func _ready():
 	$AnimationPlayer.stop(true)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(_delta):
+	if raycast.is_colliding():
+		ray_coll = raycast.get_collider()
+		if ray_coll.is_in_group("cristal") and laser_pos and ! is_charged:
+			charge()
 
 
 func play():
@@ -55,5 +60,7 @@ func charge():
 	add_to_group("action")
 	add_to_group("left")
 	add_to_group("outline")
+	$Particles.emitting = true
+	$"../Pivot_battery/Magic".play(0)
 	$"../Pivot_battery/Batterry/AnimationPlayer".play("Energy")
 	is_charged = true
