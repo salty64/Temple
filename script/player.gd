@@ -79,7 +79,7 @@ func _process(delta):
 						if ray_coll.is_in_group("action"):
 							ray_coll.play()
 
-					ray_coll_old = ray_coll
+				ray_coll_old = ray_coll
 
 			else:
 				if ray_coll.is_in_group("outline"):
