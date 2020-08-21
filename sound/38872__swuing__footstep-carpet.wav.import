@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/38872__swuing__footstep-carpet.wav-609c0f8bd651a168958b3d58dfde6499.sample"
+
+[deps]
+
+source_file="res://sound/38872__swuing__footstep-carpet.wav"
+dest_files=[ "res://.import/38872__swuing__footstep-carpet.wav-609c0f8bd651a168958b3d58dfde6499.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

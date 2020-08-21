@@ -1,4 +1,4 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=145 format=2]
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -53,6 +53,7 @@
 [ext_resource path="res://script/Trap.gd" type="Script" id=51]
 [ext_resource path="res://scenes/gui_panel_3d.tscn" type="PackedScene" id=52]
 [ext_resource path="res://sound/221683__timbre__another-magic-wand-spell-tinkle.wav" type="AudioStream" id=53]
+[ext_resource path="res://sound/38872__swuing__footstep-carpet.wav" type="AudioStream" id=54]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -716,6 +717,7 @@ script = ExtResource( 19 )
 [node name="Ambiance" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8851, 12.2727, 3.42017 )
 stream = ExtResource( 18 )
+unit_db = -10.0
 autoplay = true
 
 [node name="Secret" type="AudioStreamPlayer3D" parent="."]
@@ -792,6 +794,10 @@ __meta__ = {
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
 shape = SubResource( 5 )
+
+[node name="Foot_step" type="AudioStreamPlayer3D" parent="KinematicBody"]
+stream = ExtResource( 54 )
+unit_db = -15.0
 
 [node name="Pivot_1" type="StaticBody" parent="." groups=[
 "action",
@@ -1593,6 +1599,7 @@ shape = SubResource( 90 )
 
 [node name="GUIPanel3D" parent="." instance=ExtResource( 52 )]
 transform = Transform( -1.30337e-06, 0, 1, 0, 8, 0, -8, 0, -1.62921e-07, -9.93192, 3.52861, -14.8317 )
+[connection signal="finished" from="KinematicBody/Foot_step" to="KinematicBody" method="_on_Foot_step_finished"]
 [connection signal="canRotate" from="Column" to="Rotate_90" method="_on_Column_canRotate"]
 [connection signal="cantRotate" from="Column" to="Rotate_90" method="_on_Column_cantRotate"]
 [connection signal="animation_finished" from="Column/AnimationPlayer" to="Column" method="_on_AnimationPlayer_animation_finished"]
