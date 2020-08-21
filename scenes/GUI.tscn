@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/Kenney Pixel Square.ttf" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 22
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[node name="GUI" type="Control"]
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_right = 800.0
+margin_bottom = 450.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="End" type="RichTextLabel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -750.0
+margin_top = -450.0
+margin_right = 750.0
+margin_bottom = 450.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[color=#b6d7a8][center]Temple[/center][/color]
+
+Thank you for testing our game, it was coded during the [url=https://itch.io/jam/jamestla-3]#JamEstLa-3[/url].
+
+[color=#b6d7a8]Assets[/color]
+Modular Temple Pack: [url=https://fertile-soil-productions.itch.io/temple-modular-collection]Fertile Soil Productions[/url]
+
+[color=#b6d7a8]Sounds[/color]
+Most of the  sound effects come from [url=https://freesound.org/]Freesound [/url], the respective owners have their name in the sounds directory.
+The others come from [url=https://www.kenney.nl/assets/rpg-audio]Kenney[/url]
+[color=#b6d7a8]Font[/color]
+[url=https://www.kenney.nl/assets/rpg-audio]Kenney[/url]
+
+[color=#b6d7a8]Help[/color]
+Thanks to the entire community of the discord \"Godot est arrivé!\" for its support.
+
+Thanks to Koneko and Antharuu for being sometimes more \"salty\" than me.
+
+Thank you theludovyc for being my dev- partner.
+
+Salty
+"
+text = "
+Temple
+
+Thank you for testing our game, it was coded during the #JamEstLa-3.
+
+Assets
+Modular Temple Pack: Fertile Soil Productions
+
+Sounds
+Most of the  sound effects come from Freesound , the respective owners have their name in the sounds directory.
+The others come from Kenney
+Font
+Kenney
+
+Help
+Thanks to the entire community of the discord \"Godot est arrivé!\" for its support.
+
+Thanks to Koneko and Antharuu for being sometimes more \"salty\" than me.
+
+Thank you theludovyc for being my dev- partner.
+
+Salty
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}

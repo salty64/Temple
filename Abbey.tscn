@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://asset/Abbey_1.glb" type="PackedScene" id=1]
 [ext_resource path="res://script/player.gd" type="Script" id=2]
@@ -37,7 +37,7 @@
 [ext_resource path="res://script/Pivot_2.gd" type="Script" id=35]
 [ext_resource path="res://script/Rotate_90.gd" type="Script" id=36]
 [ext_resource path="res://scenes/5_way/Inter_levier.tscn" type="PackedScene" id=37]
-[ext_resource path="res://sound/393288__dsa98__56-ruedas-de-carrito-consolidated.wav" type="AudioStream" id=38]
+[ext_resource path="res://sound/346178__vsokorelos__rotating-switch.wav" type="AudioStream" id=38]
 [ext_resource path="res://shaders/laser_shadermaterial.tres" type="Material" id=39]
 [ext_resource path="res://script/Laser_receiver.gd" type="Script" id=40]
 [ext_resource path="res://scenes/scene_1/Guide_90.tscn" type="PackedScene" id=41]
@@ -51,6 +51,8 @@
 [ext_resource path="res://script/LaserSource.gd" type="Script" id=49]
 [ext_resource path="res://script/Reflector.gd" type="Script" id=50]
 [ext_resource path="res://script/Trap.gd" type="Script" id=51]
+[ext_resource path="res://scenes/gui_panel_3d.tscn" type="PackedScene" id=52]
+[ext_resource path="res://sound/221683__timbre__another-magic-wand-spell-tinkle.wav" type="AudioStream" id=53]
 
 [sub_resource type="ProceduralSky" id=1]
 
@@ -156,18 +158,6 @@ tracks/2/keys = {
 "points": PoolRealArray( -7.507, -0.25, 0, 0.25, 0, -12.879, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 4.5 )
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("AudioStreamPlayer3D:playing")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 4.5 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
 
 [sub_resource type="CylinderShape" id=10]
 radius = 1.6
@@ -261,7 +251,22 @@ top_radius = 0.05
 bottom_radius = 0.05
 height = 1.0
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="ParticlesMaterial" id=19]
+lifetime_randomness = 0.07
+emission_shape = 1
+emission_sphere_radius = 0.2
+gravity = Vector3( 0, 0, 0 )
+linear_accel = 10.0
+tangential_accel = 0.1
+tangential_accel_random = 1.0
+scale = 0.3
+
+[sub_resource type="SphereMesh" id=20]
+material = ExtResource( 39 )
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Animation" id=21]
 length = 3.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
@@ -294,13 +299,13 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 3 )
 }
 
-[sub_resource type="BoxShape" id=20]
+[sub_resource type="BoxShape" id=22]
 extents = Vector3( 0.362782, 0.318832, 0.371793 )
 
-[sub_resource type="BoxShape" id=21]
+[sub_resource type="BoxShape" id=23]
 extents = Vector3( 0.46629, 1.32211, 1.40832 )
 
-[sub_resource type="Animation" id=22]
+[sub_resource type="Animation" id=24]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Inter_levier:rotation_degrees")
@@ -313,32 +318,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector3( -45, 0, 0 ), Vector3( 45, 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=23]
-length = 0.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
-}
-
-[sub_resource type="Animation" id=24]
-length = 0.5
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
 }
 
 [sub_resource type="Animation" id=25]
@@ -367,11 +346,37 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 )
 }
 
-[sub_resource type="CylinderShape" id=27]
+[sub_resource type="Animation" id=27]
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=28]
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Inter_levier:rotation_degrees:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -45, -0.25, 0, 0.25, 0, 45, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="CylinderShape" id=29]
 radius = 1.13983
 height = 3.18314
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=30]
 length = 4.0
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
@@ -458,11 +463,23 @@ tracks/7/keys = {
 "times": PoolRealArray( 0, 0.3, 4 )
 }
 
-[sub_resource type="CylinderShape" id=29]
+[sub_resource type="ParticlesMaterial" id=31]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, 10, 0 )
+tangential_accel = 2.0
+scale = 0.5
+
+[sub_resource type="SphereMesh" id=32]
+material = ExtResource( 39 )
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderShape" id=33]
 radius = 1.43929
 height = 0.668333
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=34]
 length = 0.5
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
@@ -495,20 +512,20 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.5 )
 }
 
-[sub_resource type="BoxShape" id=31]
+[sub_resource type="BoxShape" id=35]
 extents = Vector3( 2.43967, 2.86908, 0.843103 )
 
-[sub_resource type="CylinderShape" id=32]
+[sub_resource type="CylinderShape" id=36]
 radius = 1.45466
 height = 0.752724
 
-[sub_resource type="PlaneMesh" id=33]
+[sub_resource type="PlaneMesh" id=37]
 size = Vector2( 70, 55 )
 
-[sub_resource type="BoxShape" id=34]
+[sub_resource type="BoxShape" id=38]
 extents = Vector3( 0.833497, 1.47772, 0.129141 )
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=39]
 length = 4.8
 tracks/0/type = "bezier"
 tracks/0/path = NodePath(".:translation:x")
@@ -541,154 +558,157 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 4.5 )
 }
 
-[sub_resource type="BoxShape" id=36]
+[sub_resource type="BoxShape" id=40]
 extents = Vector3( 4.98627, 1, 0.399866 )
 
-[sub_resource type="BoxShape" id=37]
+[sub_resource type="BoxShape" id=41]
 extents = Vector3( 0.473265, 1, 4.33338 )
 
-[sub_resource type="BoxShape" id=38]
+[sub_resource type="BoxShape" id=42]
 extents = Vector3( 0.357504, 1, 4.62488 )
 
-[sub_resource type="BoxShape" id=39]
+[sub_resource type="BoxShape" id=43]
 extents = Vector3( 1.80555, 1, 0.427569 )
 
-[sub_resource type="BoxShape" id=40]
+[sub_resource type="BoxShape" id=44]
 extents = Vector3( 10.8391, 1, 0.445696 )
 
-[sub_resource type="BoxShape" id=41]
+[sub_resource type="BoxShape" id=45]
 extents = Vector3( 8.25791, 1, 0.409171 )
 
-[sub_resource type="BoxShape" id=42]
+[sub_resource type="BoxShape" id=46]
 extents = Vector3( 1.05452, 1, 1.99236 )
 
-[sub_resource type="BoxShape" id=43]
+[sub_resource type="BoxShape" id=47]
 extents = Vector3( 1.05452, 1, 1.9761 )
 
-[sub_resource type="BoxShape" id=44]
+[sub_resource type="BoxShape" id=48]
 extents = Vector3( 0.381922, 1, 3.08665 )
 
-[sub_resource type="BoxShape" id=45]
+[sub_resource type="BoxShape" id=49]
 extents = Vector3( 1.94052, 1, 0.966154 )
 
-[sub_resource type="BoxShape" id=46]
+[sub_resource type="BoxShape" id=50]
 extents = Vector3( 1.92617, 1, 1.25176 )
 
-[sub_resource type="BoxShape" id=47]
+[sub_resource type="BoxShape" id=51]
 extents = Vector3( 0.515133, 1, 3.53377 )
 
-[sub_resource type="BoxShape" id=48]
+[sub_resource type="BoxShape" id=52]
 extents = Vector3( 1.68914, 1, 0.340991 )
 
-[sub_resource type="BoxShape" id=49]
+[sub_resource type="BoxShape" id=53]
 extents = Vector3( 11.3949, 1, 0.323712 )
 
-[sub_resource type="BoxShape" id=50]
+[sub_resource type="BoxShape" id=54]
 extents = Vector3( 0.466269, 1, 2.47252 )
 
-[sub_resource type="BoxShape" id=51]
+[sub_resource type="BoxShape" id=55]
 extents = Vector3( 2.64475, 1, 0.459017 )
 
-[sub_resource type="BoxShape" id=52]
+[sub_resource type="BoxShape" id=56]
 extents = Vector3( 2.15472, 1, 0.326007 )
 
-[sub_resource type="BoxShape" id=53]
+[sub_resource type="BoxShape" id=57]
 extents = Vector3( 0.392807, 1, 8.49412 )
 
-[sub_resource type="BoxShape" id=54]
+[sub_resource type="BoxShape" id=58]
 extents = Vector3( 1.54342, 1, 4.54872 )
 
-[sub_resource type="BoxShape" id=55]
+[sub_resource type="BoxShape" id=59]
 extents = Vector3( 0.219511, 2.21639, 2.52949 )
 
-[sub_resource type="BoxShape" id=56]
+[sub_resource type="BoxShape" id=60]
 extents = Vector3( 0.379028, 1, 16.308 )
 
-[sub_resource type="BoxShape" id=57]
+[sub_resource type="BoxShape" id=61]
 extents = Vector3( 2.23217, 1, 0.352632 )
 
-[sub_resource type="BoxShape" id=58]
+[sub_resource type="BoxShape" id=62]
 extents = Vector3( 10.6075, 1, 0.365348 )
 
-[sub_resource type="BoxShape" id=59]
+[sub_resource type="BoxShape" id=63]
 extents = Vector3( 1.60744, 1, 0.334625 )
 
-[sub_resource type="BoxShape" id=60]
+[sub_resource type="BoxShape" id=64]
 extents = Vector3( 5.21936, 1, 2.18391 )
 
-[sub_resource type="BoxShape" id=61]
+[sub_resource type="BoxShape" id=65]
 extents = Vector3( 0.884901, 1, 2.18391 )
 
-[sub_resource type="BoxShape" id=62]
-extents = Vector3( 0.57287, 1, 6.07259 )
-
-[sub_resource type="BoxShape" id=63]
-extents = Vector3( 0.57287, 1, 6.07259 )
-
-[sub_resource type="BoxShape" id=64]
-extents = Vector3( 2.11796, 3.86075, 4.01096 )
-
-[sub_resource type="BoxShape" id=65]
-extents = Vector3( 2.11796, 3.86075, 2.21501 )
-
 [sub_resource type="BoxShape" id=66]
-extents = Vector3( 0.329798, 1, 13.0172 )
+extents = Vector3( 0.57287, 1, 6.07259 )
 
 [sub_resource type="BoxShape" id=67]
-extents = Vector3( 1.38428, 1, 1 )
+extents = Vector3( 0.57287, 1, 6.07259 )
 
 [sub_resource type="BoxShape" id=68]
-extents = Vector3( 4.83038, 1, 0.342742 )
+extents = Vector3( 2.11796, 3.86075, 4.01096 )
 
 [sub_resource type="BoxShape" id=69]
-extents = Vector3( 4.83038, 1, 0.342742 )
+extents = Vector3( 2.11796, 3.86075, 2.21501 )
 
 [sub_resource type="BoxShape" id=70]
-extents = Vector3( 1.38428, 1, 1 )
+extents = Vector3( 0.329798, 1, 13.0172 )
 
 [sub_resource type="BoxShape" id=71]
-extents = Vector3( 0.389915, 2.98823, 7.57337 )
+extents = Vector3( 1.38428, 1, 1 )
 
 [sub_resource type="BoxShape" id=72]
-extents = Vector3( 1.9206, 1, 0.40654 )
+extents = Vector3( 4.83038, 1, 0.342742 )
 
 [sub_resource type="BoxShape" id=73]
-extents = Vector3( 1.7046, 1, 5.62435 )
+extents = Vector3( 4.83038, 1, 0.342742 )
 
 [sub_resource type="BoxShape" id=74]
-extents = Vector3( 0.773151, 1, 3.0506 )
+extents = Vector3( 1.38428, 1, 1 )
 
 [sub_resource type="BoxShape" id=75]
-extents = Vector3( 2.03341, 1, 1 )
+extents = Vector3( 0.389915, 2.98823, 7.57337 )
 
 [sub_resource type="BoxShape" id=76]
-extents = Vector3( 1.01075, 1, 0.861189 )
+extents = Vector3( 1.9206, 1, 0.40654 )
 
 [sub_resource type="BoxShape" id=77]
+extents = Vector3( 1.7046, 1, 5.62435 )
 
 [sub_resource type="BoxShape" id=78]
-extents = Vector3( 1.89302, 1, 7.54934 )
+extents = Vector3( 0.773151, 1, 3.0506 )
 
 [sub_resource type="BoxShape" id=79]
-extents = Vector3( 2.23221, 1.89147, 3.09761 )
+extents = Vector3( 2.03341, 1, 1 )
 
 [sub_resource type="BoxShape" id=80]
-extents = Vector3( 4.11248, 1, 3.06627 )
+extents = Vector3( 1.01075, 1, 0.861189 )
 
 [sub_resource type="BoxShape" id=81]
-extents = Vector3( 4.11248, 1, 3.06627 )
 
 [sub_resource type="BoxShape" id=82]
-extents = Vector3( 35.5036, 0.316446, 36.1949 )
+extents = Vector3( 1.89302, 1, 7.54934 )
 
-[sub_resource type="CubeMesh" id=83]
-size = Vector3( 0.1, 5, 5 )
+[sub_resource type="BoxShape" id=83]
+extents = Vector3( 2.23221, 1.89147, 3.09761 )
 
-[sub_resource type="CubeMesh" id=84]
-size = Vector3( 6, 9, 2 )
+[sub_resource type="BoxShape" id=84]
+extents = Vector3( 4.11248, 1, 3.06627 )
 
 [sub_resource type="BoxShape" id=85]
+extents = Vector3( 4.11248, 1, 3.06627 )
+
+[sub_resource type="BoxShape" id=86]
+extents = Vector3( 35.5036, 0.316446, 36.1949 )
+
+[sub_resource type="CubeMesh" id=87]
+size = Vector3( 0.1, 5, 5 )
+
+[sub_resource type="CubeMesh" id=88]
+size = Vector3( 6, 9, 2 )
+
+[sub_resource type="BoxShape" id=89]
 extents = Vector3( 3.04637, 1, 1 )
+
+[sub_resource type="BoxShape" id=90]
+extents = Vector3( 0.427208, 1, 3.04645 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 19 )
@@ -696,6 +716,7 @@ script = ExtResource( 19 )
 [node name="Ambiance" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 40.8851, 12.2727, 3.42017 )
 stream = ExtResource( 18 )
+autoplay = true
 
 [node name="Secret" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 0.892018, -0.0340036, 0.450719, -0.159539, 0.9093, 0.384344, -0.422908, -0.414749, 0.805687, 15.3818, 4.2757, 12.0537 )
@@ -716,6 +737,9 @@ transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2
 collision_layer = 2147483650
 collision_mask = 2147483650
 script = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Bell" parent="Bell" instance=ExtResource( 15 )]
 
@@ -732,7 +756,7 @@ max_db = -16.794
 [node name="KinematicBody" type="KinematicBody" parent="." groups=[
 "player",
 ]]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.02883, 4.55478, -7.71902 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.03887, 4.55478, -14.8988 )
 collision_layer = 2147483653
 collision_mask = 5
 script = ExtResource( 2 )
@@ -754,6 +778,16 @@ collision_mask = 2
 
 [node name="UI_helper" parent="KinematicBody/Camera" instance=ExtResource( 34 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 2.14577e-06, 0, -2.41045 )
+
+[node name="ColorRect" type="ColorRect" parent="KinematicBody/Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="KinematicBody/Camera"]
 
 [node name="CollisionShape" type="CollisionShape" parent="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -785,7 +819,7 @@ unit_db = 80.0
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160367, 0 )
 
 [node name="Door_Large_1" type="StaticBody" parent="."]
-transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, -2.6, 0.061, -12.879 )
+transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, -2.6, 0.061, -7.507 )
 script = ExtResource( 6 )
 
 [node name="Door_large" parent="Door_Large_1" instance=ExtResource( 5 )]
@@ -820,9 +854,10 @@ anims/Rotate_90 = SubResource( 11 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Rotate_90"]
 stream = ExtResource( 38 )
+unit_db = 10.0
 
 [node name="Door_eclipse" type="StaticBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, 2.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.51864, 0, 2.54507 )
 script = ExtResource( 47 )
 
 [node name="Door_eclipse" parent="Door_eclipse" instance=ExtResource( 14 )]
@@ -840,6 +875,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.416335, 1.8475, -1.802 )
 stream = SubResource( 14 )
 
 [node name="Lanternes" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="SpotLight1" type="OmniLight" parent="Lanternes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -19.75, 5.6, -3 )
@@ -989,8 +1027,17 @@ transform = Transform( -1.15203e-07, 0.707107, -0.707107, -1, -1.62921e-07, 0, -
 mesh = SubResource( 18 )
 material/0 = ExtResource( 39 )
 
+[node name="Rebond" type="Particles" parent="Column/Reflector"]
+transform = Transform( 0.707107, 2.47031e-21, -0.707107, 0, 1, 1.42109e-14, 0.707107, 1.69407e-21, 0.707107, 0, 1.474, 0 )
+amount = 10
+lifetime = 0.2
+preprocess = 1.31
+visibility_aabb = AABB( -0.200347, -1.77711, -10.0098, 0.400694, 3.1802, 20.3263 )
+process_material = SubResource( 19 )
+draw_pass_1 = SubResource( 20 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Column"]
-anims/Switch = SubResource( 19 )
+anims/Switch = SubResource( 21 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Column"]
 stream = ExtResource( 7 )
@@ -1001,12 +1048,15 @@ stream = ExtResource( 7 )
 collision_layer = 5
 collision_mask = 5
 script = ExtResource( 40 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Laser_receiver" parent="Laser_receiver" instance=ExtResource( 20 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="Laser_receiver"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -23.2475, 2.98705, -6.00253 )
-shape = SubResource( 20 )
+shape = SubResource( 22 )
 
 [node name="5_Way" type="Spatial" parent="."]
 script = ExtResource( 46 )
@@ -1023,7 +1073,7 @@ script = ExtResource( 27 )
 
 [node name="CollisionShape" type="CollisionShape" parent="5_Way/Inter_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 2.65431e-14, 1, -9.53674e-07, 0.132412, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="Inter_base" parent="5_Way/Inter_1" instance=ExtResource( 29 )]
 
@@ -1031,7 +1081,7 @@ shape = SubResource( 21 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_Way/Inter_1"]
-anims/Switch = SubResource( 22 )
+anims/Switch = SubResource( 24 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="5_Way/Inter_1"]
 stream = ExtResource( 28 )
@@ -1049,7 +1099,7 @@ id = 1
 
 [node name="CollisionShape" type="CollisionShape" parent="5_Way/Inter_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="Inter_base" parent="5_Way/Inter_2" instance=ExtResource( 29 )]
 
@@ -1057,7 +1107,7 @@ shape = SubResource( 21 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_Way/Inter_2"]
-anims/Switch = SubResource( 23 )
+anims/Switch = SubResource( 25 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="5_Way/Inter_2"]
 stream = ExtResource( 28 )
@@ -1075,7 +1125,7 @@ id = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="5_Way/Inter_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="Inter_base" parent="5_Way/Inter_3" instance=ExtResource( 29 )]
 
@@ -1083,7 +1133,7 @@ shape = SubResource( 21 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_Way/Inter_3"]
-anims/Switch = SubResource( 24 )
+anims/Switch = SubResource( 26 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="5_Way/Inter_3"]
 stream = ExtResource( 28 )
@@ -1101,7 +1151,7 @@ id = 3
 
 [node name="CollisionShape" type="CollisionShape" parent="5_Way/Inter_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="Inter_base" parent="5_Way/Inter_4" instance=ExtResource( 29 )]
 
@@ -1109,7 +1159,7 @@ shape = SubResource( 21 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_Way/Inter_4"]
-anims/Switch = SubResource( 25 )
+anims/Switch = SubResource( 27 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="5_Way/Inter_4"]
 stream = ExtResource( 28 )
@@ -1127,7 +1177,7 @@ id = 4
 
 [node name="CollisionShape" type="CollisionShape" parent="5_Way/Inter_5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132412, 0 )
-shape = SubResource( 21 )
+shape = SubResource( 23 )
 
 [node name="Inter_base" parent="5_Way/Inter_5" instance=ExtResource( 29 )]
 
@@ -1135,7 +1185,7 @@ shape = SubResource( 21 )
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="5_Way/Inter_5"]
-anims/Switch = SubResource( 26 )
+anims/Switch = SubResource( 28 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="5_Way/Inter_5"]
 stream = ExtResource( 28 )
@@ -1160,7 +1210,9 @@ script = ExtResource( 45 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 3, 16.5 )
 script = ExtResource( 45 )
 
-[node name="Pivot_battery" type="StaticBody" parent="."]
+[node name="Pivot_battery" type="StaticBody" parent="." groups=[
+"cristal",
+]]
 transform = Transform( 1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 14.996, 1.427, -12 )
 collision_layer = 3
 collision_mask = 3
@@ -1168,7 +1220,7 @@ script = ExtResource( 48 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_battery"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38212, 0 )
-shape = SubResource( 27 )
+shape = SubResource( 29 )
 
 [node name="Batterry" parent="Pivot_battery" instance=ExtResource( 12 )]
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
@@ -1181,13 +1233,27 @@ fov = 105.5
 transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Pivot_battery"]
-anims/Action = SubResource( 28 )
+anims/Action = SubResource( 30 )
 
 [node name="Switch" type="AudioStreamPlayer3D" parent="Pivot_battery"]
 stream = ExtResource( 28 )
 
 [node name="Slide" type="AudioStreamPlayer3D" parent="Pivot_battery"]
 stream = ExtResource( 7 )
+
+[node name="Magic" type="AudioStreamPlayer3D" parent="Pivot_battery"]
+stream = ExtResource( 53 )
+unit_db = 40.0
+
+[node name="Particles" type="Particles" parent="Pivot_battery"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0489836, 0 )
+emitting = false
+amount = 100
+one_shot = true
+speed_scale = 0.75
+explosiveness = 0.09
+process_material = SubResource( 31 )
+draw_pass_1 = SubResource( 32 )
 
 [node name="Circuit_1" parent="." instance=ExtResource( 22 )]
 
@@ -1202,7 +1268,7 @@ transform = Transform( -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0, 1, 0, 0, 0
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_90"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, -0.334196, 0, 0 )
-shape = SubResource( 29 )
+shape = SubResource( 33 )
 
 [node name="Guide_90" parent="." instance=ExtResource( 41 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.3, 4.5, 22.5 )
@@ -1218,7 +1284,7 @@ script = ExtResource( 51 )
 [node name="Trap" parent="Trap" instance=ExtResource( 26 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Trap"]
-anims/Animation_trap = SubResource( 30 )
+anims/Animation_trap = SubResource( 34 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.0816, 0.339669, 17.9084 )
@@ -1226,7 +1292,7 @@ stream = ExtResource( 33 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Trap"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.088, 0, 18.0712 )
-shape = SubResource( 31 )
+shape = SubResource( 35 )
 
 [node name="Pivot_180" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5, 4.5, 24 )
@@ -1239,7 +1305,7 @@ transform = Transform( -1.62921e-07, -1, 0, -0.00160591, 2.61637e-10, 0.999999, 
 
 [node name="CollisionShape" type="CollisionShape" parent="Pivot_180"]
 transform = Transform( -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0, 1, 0.33, 0, 0 )
-shape = SubResource( 32 )
+shape = SubResource( 36 )
 
 [node name="Guide_180" parent="." instance=ExtResource( 42 )]
 transform = Transform( -1.62921e-07, -1, 1.62921e-07, 0, -1.62921e-07, -1, 1, -1.62921e-07, 2.65431e-14, 26.7, 4.5, 24 )
@@ -1248,8 +1314,11 @@ transform = Transform( -1.62921e-07, -1, 1.62921e-07, 0, -1.62921e-07, -1, 1, -1
 
 [node name="Ceiling" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1, 3.25841e-07, 0, -3.25841e-07, -1, 12.1006, 8.91297, 7.19542 )
-mesh = SubResource( 33 )
+mesh = SubResource( 37 )
 material/0 = ExtResource( 31 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Door_Large_Exit" type="StaticBody" parent="."]
 transform = Transform( -4.88762e-07, 0, -3, 0, 3, 0, 3, 0, -4.88762e-07, 33.5, 0, 3 )
@@ -1260,10 +1329,10 @@ transform = Transform( 1, 0, -8.81073e-13, 0, 1, 0, 8.81073e-13, 0, 1, -0.506659
 
 [node name="CollisionShape" type="CollisionShape" parent="Door_Large_Exit"]
 transform = Transform( 1, 0, -8.52651e-14, 0, 1, 0, 8.52651e-14, 0, 1, 0, 1.49195, 0 )
-shape = SubResource( 34 )
+shape = SubResource( 38 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Door_Large_Exit"]
-anims/Animation_door = SubResource( 35 )
+anims/Animation_door = SubResource( 39 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Door_Large_Exit"]
 transform = Transform( 0.333333, 0, -3.55271e-15, 0, 0.333333, 0, 3.55271e-15, 0, 0.333333, 0, 0, 0 )
@@ -1271,92 +1340,95 @@ stream = ExtResource( 8 )
 unit_db = 20.0
 
 [node name="Limits" type="Spatial" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Limit_1" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.00041, 0, -19.5267 )
-shape = SubResource( 36 )
+shape = SubResource( 40 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5252, 0, -15.0175 )
-shape = SubResource( 37 )
+shape = SubResource( 41 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.49163, 0, -15.0398 )
-shape = SubResource( 38 )
+shape = SubResource( 42 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9849, 0, -10.5392 )
-shape = SubResource( 39 )
+shape = SubResource( 43 )
 
 [node name="Limit_2" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11.344, 0, -1.41183 )
-shape = SubResource( 40 )
+shape = SubResource( 44 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.4887, 0, -10.4613 )
-shape = SubResource( 41 )
+shape = SubResource( 45 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, -22.4422, 0, -2.18895 )
-shape = SubResource( 42 )
+shape = SubResource( 46 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -22.4422, 0, -9.79017 )
-shape = SubResource( 43 )
+shape = SubResource( 47 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.465, 0, -5.99382 )
-shape = SubResource( 44 )
+shape = SubResource( 48 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.34465e-07, 0, -9.35198 )
-shape = SubResource( 45 )
+shape = SubResource( 49 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00758553, 0, -2.37009 )
-shape = SubResource( 46 )
+shape = SubResource( 50 )
 
 [node name="Limit_3" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46489, 0, -12.1413 )
-shape = SubResource( 47 )
+shape = SubResource( 51 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 2.47569, 0, -15.7294 )
-shape = SubResource( 48 )
+shape = SubResource( 52 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2862, 0, -16.5143 )
-shape = SubResource( 49 )
+shape = SubResource( 53 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56256, 0, -0.970579 )
-shape = SubResource( 50 )
+shape = SubResource( 54 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59653, 0, 1.04899 )
-shape = SubResource( 51 )
+shape = SubResource( 55 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9746, 0, 0.9056 )
-shape = SubResource( 52 )
+shape = SubResource( 56 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5696, 0, -7.8299 )
-shape = SubResource( 53 )
+shape = SubResource( 57 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.487, 0, -9.00188 )
-shape = SubResource( 54 )
+shape = SubResource( 58 )
 
 [node name="CollisionShape9" type="CollisionShape" parent="Limits/Limit_3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5178, 2.3164, -8.99437 )
-shape = SubResource( 55 )
+shape = SubResource( 59 )
 
 [node name="Limit_4" type="StaticBody" parent="Limits"]
 collision_layer = 5
@@ -1364,143 +1436,166 @@ collision_mask = 5
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01217, 0, 17.2496 )
-shape = SubResource( 56 )
+shape = SubResource( 60 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 3.87574, 0, 33.5635 )
-shape = SubResource( 57 )
+shape = SubResource( 61 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0106, 0, 34.4975 )
-shape = SubResource( 58 )
+shape = SubResource( 62 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 26.2105, 0, 33.5478 )
-shape = SubResource( 59 )
+shape = SubResource( 63 )
 
 [node name="CollisionShape6" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4806, 0, 14.5068 )
-shape = SubResource( 60 )
+shape = SubResource( 64 )
 
 [node name="CollisionShape7" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6454, 0, 14.892 )
-shape = SubResource( 61 )
+shape = SubResource( 65 )
 
 [node name="CollisionShape8" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.494, 0, 7.02681 )
-shape = SubResource( 62 )
+shape = SubResource( 66 )
 
 [node name="CollisionShape9" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4878, 0, 7.02681 )
-shape = SubResource( 63 )
+shape = SubResource( 67 )
 
 [node name="CollisionShape10" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0046, 3.87003, 20.5971 )
-shape = SubResource( 64 )
+shape = SubResource( 68 )
 
 [node name="CollisionShape11" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0046, 3.87003, 32.8153 )
-shape = SubResource( 65 )
+shape = SubResource( 69 )
 
 [node name="CollisionShape12" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0284, 0, 20.6466 )
-shape = SubResource( 66 )
+shape = SubResource( 70 )
 
 [node name="CollisionShape13" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 28.3724, 0, 7.35732 )
-shape = SubResource( 67 )
+shape = SubResource( 71 )
 
 [node name="CollisionShape14" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4701, 0, 6.02489 )
-shape = SubResource( 68 )
+shape = SubResource( 72 )
 
 [node name="CollisionShape15" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 33.4701, 0, -0.0135932 )
-shape = SubResource( 69 )
+shape = SubResource( 73 )
 
 [node name="CollisionShape16" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 28.3724, 0, -1.35779 )
-shape = SubResource( 70 )
+shape = SubResource( 74 )
 
 [node name="mur_laser" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.0825, 2.00397, -9.19915 )
-shape = SubResource( 71 )
+shape = SubResource( 75 )
 
 [node name="CollisionShape18" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 26.1319, 0, -15.7185 )
-shape = SubResource( 72 )
+shape = SubResource( 76 )
 
 [node name="CollisionShape19" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 25.0648, 0, -8.23302 )
-shape = SubResource( 73 )
+shape = SubResource( 77 )
 
 [node name="CollisionShape20" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5427, 0, -8.36795 )
-shape = SubResource( 74 )
+shape = SubResource( 78 )
 
 [node name="CollisionShape21" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4751, 0, 0.941742 )
-shape = SubResource( 75 )
+shape = SubResource( 79 )
 
 [node name="CollisionShape22" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5099, 0, -7.45858 )
-shape = SubResource( 76 )
+shape = SubResource( 80 )
 
 [node name="CollisionShape23" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4365, 0, -16.3251 )
-shape = SubResource( 77 )
+shape = SubResource( 81 )
 
 [node name="CollisionShape24" type="CollisionShape" parent="Limits/Limit_4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6535, 0, -5.94298 )
-shape = SubResource( 78 )
+shape = SubResource( 82 )
 
 [node name="Limit_5" type="StaticBody" parent="Limits"]
 
 [node name="CollisionShape" type="CollisionShape" parent="Limits/Limit_5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0205, 0.914922, 27.5929 )
-shape = SubResource( 79 )
+shape = SubResource( 83 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="Limits/Limit_5"]
 transform = Transform( 0.906308, -0.422618, 0, 0.422618, 0.906308, 0, 0, 0, 1, 9.48716, 0.161977, 27.6134 )
-shape = SubResource( 80 )
+shape = SubResource( 84 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="Limits/Limit_5"]
 transform = Transform( -0.906308, 0.422618, -3.25841e-07, 0.422618, 0.906308, 0, 2.95313e-07, -1.37707e-07, -1, 20.5276, 0.161977, 27.6134 )
-shape = SubResource( 81 )
+shape = SubResource( 85 )
 
 [node name="Floor" type="StaticBody" parent="."]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape" type="CollisionShape" parent="Floor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7609, -0.283657, 4.98108 )
-shape = SubResource( 82 )
+shape = SubResource( 86 )
 
 [node name="OmniLight" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 6.51944, 6.65175 )
 shadow_enabled = true
 omni_range = 13.0017
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Cache" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7613, 4.5287, 22.5159 )
-mesh = SubResource( 83 )
+mesh = SubResource( 87 )
 material/0 = ExtResource( 31 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Cache2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 27.3001, 4.5287, 23.9741 )
-mesh = SubResource( 83 )
+mesh = SubResource( 87 )
 material/0 = ExtResource( 31 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Door_laser" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -6.5, 15 )
 
 [node name="Door" type="MeshInstance" parent="Door_laser"]
-mesh = SubResource( 84 )
+mesh = SubResource( 88 )
 material/0 = ExtResource( 39 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Door_laser"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.96678, 0 )
-shape = SubResource( 85 )
+shape = SubResource( 89 )
+
+[node name="End" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.1119, 4.5666, 2.97716 )
+
+[node name="CollisionShape" type="CollisionShape" parent="End"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.759308, -2.39371, 0 )
+shape = SubResource( 90 )
+
+[node name="GUIPanel3D" parent="." instance=ExtResource( 52 )]
+transform = Transform( -1.30337e-06, 0, 1, 0, 8, 0, -8, 0, -1.62921e-07, -9.93192, 3.52861, -14.8317 )
 [connection signal="canRotate" from="Column" to="Rotate_90" method="_on_Column_canRotate"]
 [connection signal="cantRotate" from="Column" to="Rotate_90" method="_on_Column_cantRotate"]
 [connection signal="animation_finished" from="Column/AnimationPlayer" to="Column" method="_on_AnimationPlayer_animation_finished"]
 [connection signal="laserTouch" from="Laser_receiver" to="Door_eclipse" method="_on_laserTouch"]
 [connection signal="body_entered" from="Trap" to="Trap" method="_on_Trap_body_entered"]
+[connection signal="body_entered" from="End" to="KinematicBody" method="_on_End_body_entered"]
