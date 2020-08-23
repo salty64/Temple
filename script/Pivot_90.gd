@@ -22,6 +22,7 @@ func play():
 		$"../Guide_90/AnimationPlayer".play("Energy_Switch")
 		if $"../Trap".is_in_group("trap"):
 			$"../Trap".untrap()
+			$"../Trap".remove_from_group("trap")
 
 		done = true
 	else:
@@ -29,8 +30,8 @@ func play():
 		yield($Circle_90/AnimationPlayer, "animation_finished")
 		$"../Circuit_2/AnimationPlayer".play("Energy_ON")
 		$"../Guide_90/AnimationPlayer".play("Energy")
-		if $"../Trap".is_in_group("trap"):
-			$"../Trap".trap()
+		$"../Trap".add_to_group("trap")
+		$"../Trap".trap()
 
 		done = false
 
