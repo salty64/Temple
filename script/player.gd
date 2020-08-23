@@ -2,6 +2,7 @@ extends KinematicBody
 class_name Player
 
 var dir: Vector3
+
 var SPEED = 10.0
 var SENSI = 0.5
 var mouse_speed: Vector2
@@ -16,6 +17,10 @@ var ray_coll_reflection_old: Node = null
 var ray_reflection_have_collision := false
 
 var can_move = true
+var step = false
+
+var pos: Vector3
+var old_pos = Vector3(0, 0, 0)
 
 
 # Called when the node enters the scene tree for the first time.
@@ -33,6 +38,16 @@ func _input(event):
 func _process(delta):
 	if can_move:
 		dir = Vector3(int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left")), 0, int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up")))
+
+		pos = self.translation
+
+		if pos != old_pos:
+			if ! $Foot_step.is_playing():
+				$Foot_step.play()
+			else:
+				if step:
+					step = false
+			old_pos = pos
 
 		$Camera.rotate_x(-mouse_speed.y * SENSI * delta)
 		$Camera.rotation.x = clamp($Camera.rotation.x, -0.8, 0.8)
@@ -64,7 +79,7 @@ func _process(delta):
 						if ray_coll.is_in_group("action"):
 							ray_coll.play()
 
-					ray_coll_old = ray_coll
+				ray_coll_old = ray_coll
 
 			else:
 				if ray_coll.is_in_group("outline"):
@@ -98,6 +113,7 @@ func _physics_process(_delta):
 			dir.y -= 1
 
 		move_and_slide(dir.rotated(Vector3.UP, rotation.y).normalized() * SPEED, Vector3.UP, true)
+
 		if raycast.is_colliding():
 			ray_coll = raycast.get_collider()
 			ray_have_collision = true
@@ -120,3 +136,7 @@ func gui_pos(pos):
 	var ecart: float
 	ecart = $Camera.translation.distance_to(pos)
 	$Camera/UI_helper.translation.z = -ecart / 9
+
+
+func _on_Foot_step_finished():
+	step = true
